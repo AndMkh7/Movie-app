@@ -1,0 +1,19 @@
+.header{
+    /*background: cadetblue;*/
+    display: flex;
+    flex-direction:row ;
+    justify-content:space-between ;
+    color:orange;
+    padding : 5px 0 5px 2px;
+}
+.buttons{
+    display: flex;
+}
+
+.btn{
+    margin: 0 5px;
+}
+
+.logo{
+    height: 30px;
+}
