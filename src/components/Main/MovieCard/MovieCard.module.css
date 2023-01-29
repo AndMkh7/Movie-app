@@ -1,13 +1,22 @@
 .movieCard{
-    margin-left: 5px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    padding-bottom: 23px;
+    margin-bottom: 23px;
+    margin-left: 20px;
+}
+
+.movieCard:hover{
+    border-color: tomato;
+    transform: scale(1.05);
+    transition: 0.7s;
 }
 
 .img{
     width:14rem;
     height:20rem;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0 ;
     box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
     -webkit-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
     -moz-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
@@ -16,7 +25,11 @@
 .title{
     font-size: 12px;
     font-family: Inconsolata, sans-serif;
-    margin-bottom: 7px;
+    margin-top:15px;
+    margin-bottom: 3px;
+    height: 30px;
+    position: static;
+    color:midnightblue;
 }
 
 .aboutMovie{
@@ -24,17 +37,27 @@
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    margin-top: 7px;
+    background-color: darkgray;
+    border-radius: 0 0 4px 4px;
 }
 
 .date{
     font-size: 15px;
     color:midnightblue;
     font-weight: bolder;
-}
+    margin: 5px 0 5px 4px;
+    }
 
 .rate{
     font-size: 15px;
     color:coral;
     font-weight: bolder;
+    margin: 5px 4px 5px 0;
+}
+
+.rateAqua{
+    font-size: 15px;
+    font-weight: bolder;
+    margin: 5px 4px 5px 0;
+    color:lawngreen;
 }

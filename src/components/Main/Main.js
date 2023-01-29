@@ -15,16 +15,14 @@ function Main () {
         fetch(API_URL)
             .then(
                 response=>response.json())
-            .then(data=>{
-                    console.log(data.results);
-                    setMovies(data.results)
-                }
-                )
+            .then(data=>
+                    setMovies(data.results))
+            .catch(error => console.log("error", error))
     },[])
 
     return (
         <div className={s.main} >
-            {movies.map((movie)=> <MovieCard key={movie.id} {...movie}/>)}
+            {movies ? movies.map((movie)=> <MovieCard key={movie.id} {...movie}/>): "No data"}
         </div>
     )
 }

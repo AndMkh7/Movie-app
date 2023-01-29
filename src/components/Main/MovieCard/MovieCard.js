@@ -6,11 +6,11 @@ const API_IMG = "https://image.tmdb.org/t/p/w500" ;
 function MovieCard ({title,poster_path,release_date,vote_average}) {
     return (
         <div className={s.movieCard}>
-            <h6 className={s.title}>{title}</h6>
+            <div className={s.title}>{title}</div>
             <img className={s.img} src={API_IMG+poster_path}  alt={title}/>
             <div className={s.aboutMovie}>
                 <div className={s.date}>{release_date}</div>
-                <div className={s.rate}>{vote_average}</div>
+                <div className={vote_average>=8?s.rateAqua:s.rate} >{vote_average}</div>
             </div>
         </div>
     )

@@ -4,8 +4,6 @@
 
 }
 
-
-
 .container{
   padding: 0 150px;
 }
@@ -13,4 +11,5 @@
 .toolBar{
   display: flex;
   flex-direction: row;
+  justify-content:space-between ;
 }
