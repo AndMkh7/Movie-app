@@ -1,0 +1,40 @@
+.movieCard{
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.img{
+    width:14rem;
+    height:20rem;
+    border-radius: 10px;
+    box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
+    -webkit-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
+    -moz-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
+}
+
+.title{
+    font-size: 12px;
+    font-family: Inconsolata, sans-serif;
+    margin-bottom: 7px;
+}
+
+.aboutMovie{
+    width: 14rem;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-top: 7px;
+}
+
+.date{
+    font-size: 15px;
+    color:midnightblue;
+    font-weight: bolder;
+}
+
+.rate{
+    font-size: 15px;
+    color:coral;
+    font-weight: bolder;
+}

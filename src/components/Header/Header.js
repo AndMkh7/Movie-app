@@ -7,7 +7,7 @@ import Login from './Login/Login';
 
 function Header () {
 
-    const [isLoggedIn , setIsLoggedIn] = useState(false);
+    const [isLoggedIn , setIsLoggedIn] = useState(true);
 
 
 
@@ -19,9 +19,13 @@ function Header () {
                 {
                     isLoggedIn ?
                         <>
-                            <button className={s.btn}>Logout</button>
                             <button className={s.btn}>Home</button>
                             <button className={s.btn}>Favorites</button>
+                            <button className={s.btn} onClick={()=>{
+                                setIsLoggedIn(false)
+                            }
+                            }>Logout</button>
+
                         </>
                         : <Login/>
 

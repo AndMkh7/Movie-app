@@ -1,8 +1,16 @@
 .App {
   background: black;
   margin: auto;
+
 }
+
+
 
 .container{
   padding: 0 150px;
+}
+
+.toolBar{
+  display: flex;
+  flex-direction: row;
 }

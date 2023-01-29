@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-const users={
-    user1:{
-        email:"user1@gmail.com",
-        password:"user1*user1"
-    },
-    user2:{
-        email:"user2@gmail.com",
-        password:"user2*user2"
-    }
-
-}
+// const users={
+//     user1:{
+//         email:"user1@gmail.com",
+//         password:"user1*user1"
+//     },
+//     user2:{
+//         email:"user2@gmail.com",
+//         password:"user2*user2"
+//     }
+//
+// }
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -35,7 +35,7 @@ const Login = () => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+            <button type="submit" >Login</button>
         </form>
     )
 }
