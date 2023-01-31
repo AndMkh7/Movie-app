@@ -10,7 +10,7 @@ function MovieCard ({title,poster_path,release_date,vote_average}) {
             <img className={s.img} src={API_IMG+poster_path}  alt={title}/>
             <div className={s.aboutMovie}>
                 <div className={s.date}>{release_date}</div>
-                <div className={vote_average>=8?s.rateAqua:s.rate} >{vote_average}</div>
+                <div className={vote_average>=7?s.rateAqua:s.rate} >{vote_average}</div>
             </div>
         </div>
     )
