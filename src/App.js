@@ -7,13 +7,14 @@ import s from "./App.module.css"
 import Filter from './components/Filter/Filter';
 
 
+
 const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4";
-
-
+// const API_SEARCH = "https://api.themoviedb.org/3/search/company?api_key=41c7736fada50851ecd6e23d73e02ef4&query";
+const API_SEARCH2="https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query"
 function App() {
 
     const [movies, setMovies]=useState([]);
-    const [query, setQuery]=useState('');
+    const [searchText, setSearchText]=useState('');
 
     useEffect(() => {
         fetch(API_URL)
@@ -22,33 +23,46 @@ function App() {
                 console.log(data);
                 setMovies(data.results);
             })
-    }, [])
+    }, []);
 
 
-    const searchMovie = async(e)=>{
-        e.preventDefault();
+    const searchMovie = async(event)=>{
+        event.preventDefault();
         console.log("Searching");
         try{
-            const url=`https://api.themoviedb.org/3/search/movie?api_key=bcc4ff10c2939665232d75d8bf0ec093&query=${query}`;
-            const res= await fetch(url);
-            const data= await res.json();
-            console.log(data);
-            setMovies(data.results);
+            const url= API_SEARCH2 + "=" + searchText;
+            const searchRes= await fetch(url);
+            const searchData= await searchRes.json();
+            console.log("search data",searchData);
+            if(searchData.results.length === 0){
+                console.log("No data with your searching text")
+            } else{
+                setMovies(searchData.results);
+            }
+
+            setSearchText("");
         }
-        catch(e){
-            console.log(e);
+        catch(error){
+            console.log(error);
         }
     }
 
+
+
     const changeHandler=(e)=>{
-        setQuery(e.target.value);
-    }
-  return (
+        setSearchText(e.target.value);
+
+    };
+
+
+
+    return (
+
       <div className={s.App} >
 
                 <div className={s.container}>
 
-                    <NaviBar query={query} searchMovie={searchMovie} changeHandler={changeHandler} />
+                    <NaviBar query={searchText} searchMovie={searchMovie} changeHandler={changeHandler} />
 
                     <Filter/>
 

@@ -3,15 +3,20 @@ import './NaviBar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Container,Nav,Form, FormControl,Button } from 'react-bootstrap';
 
+
 // const API_URL="https://api.themoviedb.org/3/movie/popular?api_key=<<api_key_here>>";
 // const API_SEARCH="https://api.themoviedb.org/3/search/movie?api_key=<<api_key_here>>&query";
+
+
+
+
 function NaviBar({query,searchMovie,changeHandler}) {
 
     return (
         <>
             <Navbar bg="dark" expand="lg" variant="dark">
                 <Container fluid>
-                    <Navbar.Brand href="/home">MovieDb App</Navbar.Brand>
+                    <Navbar.Brand href="/home">Movie App</Navbar.Brand>
                     <Navbar.Brand href="/home">Trending</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll"></Navbar.Toggle>
 
@@ -28,16 +33,20 @@ function NaviBar({query,searchMovie,changeHandler}) {
                                 className="me-2"
                                 aria-label="search"
                                 name="query"
-                                value={query} onChange={changeHandler}></FormControl>
+                                value={query} onChange={changeHandler}>
+
+                            </FormControl>
                             <Button variant="secondary" type="submit" className="me-2">Search</Button>
                         <Nav>
-                            <Button variant="primary"  className="me-2">LogIn</Button>
-                            <Button variant="primary" className="me-2">LogOut</Button>
+                            <Button variant="primary"  className=" me-2  border-warning">LogIn</Button>
+                            <Button variant="primary"  className=" me-2  border-warning" >LogOut</Button>
                         </Nav>
 
-
-
                         </Form>
+                        <div style={{color:"red"}}>
+                            {query}
+                        </div>
+
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
