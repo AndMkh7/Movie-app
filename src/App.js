@@ -7,24 +7,40 @@ import s from "./App.module.css"
 import Filter from './components/Filter/Filter';
 
 
-
+// const url = "https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page="
 const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4";
 // const API_SEARCH = "https://api.themoviedb.org/3/search/company?api_key=41c7736fada50851ecd6e23d73e02ef4&query";
-const API_SEARCH2="https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query"
+const API_SEARCH2="https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query";
+const GENRE_API= "https://api.themoviedb.org/3/genre/movie/list?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US";
+
 function App() {
 
-    const [movies, setMovies]=useState([]);
-    const [searchText, setSearchText]=useState('');
+    const [movies, setMovies] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [genres , setGenres]  = useState([]);
+    const [filtered, setFiltered] = useState([]);
+    const [activeGenreId , setActiveGenreId] = useState(0)
+
 
     useEffect(() => {
         fetch(API_URL)
             .then((res)=>res.json())
             .then(data=>{
-                console.log(data);
                 setMovies(data.results);
+
             })
     }, []);
 
+
+
+    useEffect(() => {
+        fetch(GENRE_API)
+            .then((res)=>res.json())
+            .then(data=>{
+                console.log("Genres",data);
+                setGenres(data.genres);
+            })
+    }, []);
 
     const searchMovie = async(event)=>{
         event.preventDefault();
@@ -45,7 +61,7 @@ function App() {
         catch(error){
             console.log(error);
         }
-    }
+    };
 
 
 
@@ -53,7 +69,6 @@ function App() {
         setSearchText(e.target.value);
 
     };
-
 
 
     return (
@@ -64,9 +79,9 @@ function App() {
 
                     <NaviBar query={searchText} searchMovie={searchMovie} changeHandler={changeHandler} />
 
-                    <Filter/>
+                    <Filter movies={movies} genres={genres} activeGenreId={activeGenreId} setActiveGenreId={setActiveGenreId} setFiltered={setFiltered}/>
 
-                    <Main movies ={movies}/>
+                    <Main  genres ={genres} filtered={filtered}/>
 
                     <Footer/>
 

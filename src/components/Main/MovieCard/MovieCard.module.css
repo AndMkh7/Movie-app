@@ -4,7 +4,7 @@
     cursor: pointer;
     padding-bottom: 23px;
     margin-bottom: 23px;
-    margin-left: 20px;
+
 }
 
 .movieCard:hover{
@@ -14,8 +14,8 @@
 }
 
 .img{
-    width:14rem;
-    height:20rem;
+    width:10rem;
+    height:15rem;
     border-radius: 10px 10px 0 0 ;
     box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
     -webkit-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
@@ -33,7 +33,7 @@
 }
 
 .aboutMovie{
-    width: 14rem;
+    width: 10rem;
     display: flex;
     flex-direction: row;
     justify-content:space-between;
