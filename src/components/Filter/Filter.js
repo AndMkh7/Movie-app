@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import s from"./Filter.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import PropTypes from 'prop-types';
 
 const years = [
     2023,
@@ -133,6 +133,16 @@ const years = [
     1897,
     1896
 ];
+
+Filter.propTypes={
+    movies:PropTypes.array,
+    genres:PropTypes.array,
+    activeGenreId:PropTypes.number,
+    setFiltered:PropTypes.func,
+    setActiveGenreId:PropTypes.func,
+    filterByYearValue:PropTypes.string,
+    setFilterByYearValue:PropTypes.func
+}
 
 
 function Filter ({movies, genres, activeGenreId,setFiltered,setActiveGenreId ,filterByYearValue, setFilterByYearValue }) {
