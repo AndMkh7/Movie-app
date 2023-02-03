@@ -1,6 +1,6 @@
 .main{
     display: grid;
-    position: absolute;
+    position: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     grid-column-gap: 10px;

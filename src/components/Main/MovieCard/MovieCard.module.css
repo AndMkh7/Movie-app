@@ -1,17 +1,21 @@
+
+
 .movieCard{
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    padding-bottom: 23px;
-    margin-bottom: 23px;
+    /*padding-bottom: 50px;*/
+    margin : 10px 25px 25px auto;
 
 }
 
-.movieCard:hover{
+.movieCardData:hover{
     border-color: tomato;
     transform: scale(1.05);
     transition: 0.7s;
 }
+
+
 
 .img{
     width:10rem;
