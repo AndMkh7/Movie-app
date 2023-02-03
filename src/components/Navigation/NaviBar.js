@@ -2,7 +2,15 @@ import React from 'react';
 import './NaviBar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Container,Nav,Form, FormControl,Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
+
+NaviBar.propTypes={
+    query:PropTypes.string,
+    searchMovie:PropTypes.func,
+    changeHandler:PropTypes.func,
+
+}
 
 
 function NaviBar({query,searchMovie,changeHandler}) {

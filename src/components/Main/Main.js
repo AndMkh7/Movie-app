@@ -1,7 +1,12 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-
 import MovieCard from './MovieCard/MovieCard';
+import PropTypes from 'prop-types';
+
+
+Main.propTypes={
+    filtered:PropTypes.array,
+    }
 
 function Main({  filtered }) {
     return (

@@ -1,5 +1,15 @@
 import React from 'react';
 import  s from "./MovieCard.module.css";
+import PropTypes from 'prop-types';
+
+
+MovieCard.propTypes={
+    title:PropTypes.string,
+    poster_path:PropTypes.string,
+    release_date:PropTypes.string,
+    vote_average:PropTypes.number,
+
+}
 
 const API_IMG = "https://image.tmdb.org/t/p/w500" ;
 
