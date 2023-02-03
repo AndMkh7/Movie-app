@@ -9,6 +9,13 @@
 
 }
 
+.movieCardData{
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
 .movieCardData:hover{
     border-color: tomato;
     transform: scale(1.05);
@@ -27,6 +34,7 @@
 }
 
 .title{
+    width: 10rem;
     font-size: 12px;
     font-family: Inconsolata, sans-serif;
     margin-top:15px;
@@ -38,6 +46,8 @@
 
 .aboutMovie{
     width: 10rem;
+
+    /*width: 10rem;*/
     display: flex;
     flex-direction: row;
     justify-content:space-between;
