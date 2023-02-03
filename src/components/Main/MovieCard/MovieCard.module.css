@@ -3,7 +3,7 @@
 .movieCard{
     display: flex;
     flex-direction: column;
-    cursor: pointer;
+
     /*padding-bottom: 50px;*/
     margin : 10px 25px 25px auto;
 
