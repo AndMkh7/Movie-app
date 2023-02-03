@@ -1,12 +1,14 @@
 .filter{
     background: #252323;
+    width: auto;
+    height: auto;
+
 }
 
-.genres{
+.genreButton{
     align-items: center;
     background-color: black;
     color:white;
-    border-color: white;
     border-radius: 5px;
     box-sizing: border-box;
     padding: 2px 10px;
@@ -20,15 +22,31 @@
     z-index: 0;
     border-width: 1px;
     margin: 5px 5px;
+
+    -webkit-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+    -moz-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+    box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+}
+.genreButton:active{
+    background-color: snow;
+    color:black;
 }
 
-.genres:hover{
+
+
+.genreButton:hover{
     background-color: snow;
     color:black;
     border-width:1px ;
     opacity: 0.5;
     transform: scale(1.03);
     margin:5px 2px ;
+    -webkit-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+    -moz-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+    box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
 
 }
 
+.active{
+    background-color: red;
+}

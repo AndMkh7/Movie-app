@@ -19,7 +19,9 @@ function App() {
     const [searchText, setSearchText] = useState('');
     const [genres , setGenres]  = useState([]);
     const [filtered, setFiltered] = useState([]);
-    const [activeGenreId , setActiveGenreId] = useState(0)
+    const [activeGenreId , setActiveGenreId] = useState(0);
+    const [filterByYearValue, setFilterByYearValue] = useState("all");
+
 
 
     useEffect(() => {
@@ -71,6 +73,7 @@ function App() {
     };
 
 
+
     return (
 
       <div className={s.App} >
@@ -79,7 +82,10 @@ function App() {
 
                     <NaviBar query={searchText} searchMovie={searchMovie} changeHandler={changeHandler} />
 
-                    <Filter movies={movies} genres={genres} activeGenreId={activeGenreId} setActiveGenreId={setActiveGenreId} setFiltered={setFiltered}/>
+                    <Filter movies={movies} genres={genres} activeGenreId={activeGenreId}
+                            setActiveGenreId={setActiveGenreId} setFiltered={setFiltered}
+                            filterByYearValue={filterByYearValue} setFilterByYearValue={setFilterByYearValue}
+                    />
 
                     <Main  genres ={genres} filtered={filtered}/>
 
