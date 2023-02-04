@@ -44,7 +44,7 @@ function App() {
                     setGenres(data.genres);
                     setLoading(false)
                 })
-        },2500)
+        },1200)
 
     }, []);
 
