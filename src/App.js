@@ -5,11 +5,10 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import s from "./App.module.css"
 import Filter from './components/Filter/Filter';
+import Loader from './components/Loader/Loader';
 
 
-// const url = "https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page="
 const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4";
-// const API_SEARCH = "https://api.themoviedb.org/3/search/company?api_key=41c7736fada50851ecd6e23d73e02ef4&query";
 const API_SEARCH2="https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query";
 const GENRE_API= "https://api.themoviedb.org/3/genre/movie/list?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US";
 
@@ -21,6 +20,7 @@ function App() {
     const [filtered, setFiltered] = useState([]);
     const [activeGenreId , setActiveGenreId] = useState(0);
     const [filterByYearValue, setFilterByYearValue] = useState("all");
+    const [ wasLoaded , setWasLoaded]=useState(false);
 
 
 
@@ -29,10 +29,9 @@ function App() {
             .then((res)=>res.json())
             .then(data=>{
                 setMovies(data.results);
-
+                setWasLoaded(true);
             })
     }, []);
-
 
 
     useEffect(() => {
@@ -76,6 +75,8 @@ function App() {
 
     return (
 
+        wasLoaded ?
+
       <div className={s.App} >
 
                 <div className={s.container}>
@@ -87,14 +88,15 @@ function App() {
                             filterByYearValue={filterByYearValue} setFilterByYearValue={setFilterByYearValue}
                     />
 
-                    <Main  genres ={genres} filtered={filtered}/>
+                    <Main filtered={filtered}/>
+
 
                     <Footer/>
 
                 </div>
 
 
-      </div>
+      </div> : <Loader />
   );
 }
 

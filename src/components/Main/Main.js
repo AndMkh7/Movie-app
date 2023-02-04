@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 
 Main.propTypes={
-    filtered:PropTypes.array,
+    filtered:[PropTypes.array],
     }
 
-function Main({  filtered }) {
+function Main({  filtered  }) {
     return (
         <Container className="main">
             {
@@ -17,7 +17,9 @@ function Main({  filtered }) {
 
                         {filtered.map((movie) => (
                             <Col  xs={12} sm={6} md={4} lg={3} key={movie.id}>
+
                                 <MovieCard {...movie} />
+
                             </Col>
 
                         ))}
