@@ -20,7 +20,7 @@ function App() {
     const [filtered, setFiltered] = useState([]);
     const [activeGenreId , setActiveGenreId] = useState(0);
     const [filterByYearValue, setFilterByYearValue] = useState("all");
-    const [ wasLoaded , setWasLoaded]=useState(false);
+    const [ loading , setLoading]=useState(false);
 
 
 
@@ -29,18 +29,23 @@ function App() {
             .then((res)=>res.json())
             .then(data=>{
                 setMovies(data.results);
-                setWasLoaded(true);
+                setLoading(true);
             })
     }, []);
 
 
     useEffect(() => {
-        fetch(GENRE_API)
-            .then((res)=>res.json())
-            .then(data=>{
-                console.log("Genres",data);
-                setGenres(data.genres);
-            })
+        setTimeout(()=>{
+            setLoading(true)
+            fetch(GENRE_API)
+                .then((res)=>res.json())
+                .then(data=>{
+                    console.log("Genres",data);
+                    setGenres(data.genres);
+                    setLoading(false)
+                })
+        },2500)
+
     }, []);
 
     const searchMovie = async(event)=>{
@@ -72,10 +77,9 @@ function App() {
     };
 
 
-
     return (
 
-        wasLoaded ?
+        loading ? <Loader loading ={loading} /> :
 
       <div className={s.App} >
 
@@ -96,7 +100,7 @@ function App() {
                 </div>
 
 
-      </div> : <Loader />
+      </div>
   );
 }
 

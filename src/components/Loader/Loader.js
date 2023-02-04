@@ -1,16 +1,21 @@
 import React from 'react';
-import { ClipLoader } from 'react-spinners';
+import { RingLoader } from 'react-spinners';
 import s from "./Loader.module.css";
+import PropTypes from 'prop-types';
 
-function Loader () {
+
+Loader.propTypes={
+    loading:[PropTypes.bool],
+}
+
+function Loader ({loading}) {
     return (
         <div className={s.loader}>
-            <ClipLoader
+            <RingLoader
                 color="#11ecc0"
-                loading={true}
-                size={200}
-                aria-label="Loading Spinner"
-                data-testid="loader"
+                size={150}
+                speedMultiplier={1}
+                loadin={loading}
             />
         </div>
     );
