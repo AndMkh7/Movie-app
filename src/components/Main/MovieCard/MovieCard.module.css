@@ -1,11 +1,7 @@
-
-
 .movieCard{
     display: flex;
     flex-direction: column;
-
-    /*padding-bottom: 50px;*/
-    margin : 10px 25px 25px auto;
+    margin : 10px 25px 25px 10px;
 
 }
 
@@ -60,7 +56,7 @@
     color:midnightblue;
     font-weight: bolder;
     margin: 5px 0 5px 4px;
-    }
+}
 
 .rate{
     font-size: 15px;

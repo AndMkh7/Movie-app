@@ -31,4 +31,3 @@ function MovieCard ({title,poster_path,release_date,vote_average}) {
 }
 
 export  default MovieCard;
-

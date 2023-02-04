@@ -178,7 +178,6 @@ function Filter ({movies, genres, activeGenreId,setFiltered,setActiveGenreId ,fi
     return (
         <div className={s.filter}>
             <div>
-                <button className={s.genreButton}  onClick={()=>setActiveGenreId(0)}>All Movies</button>
                 {
                     genres.map((genre)=>(
                             <button className={s.genreButton} key={genre.id} onClick={()=>setActiveGenreId(genre.id)}>{genre.name}</button>

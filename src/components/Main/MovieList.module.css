@@ -1,0 +1,17 @@
+.main{
+    display: grid;
+    position: center;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 50px;
+    background: antiquewhite;
+    padding-bottom: 20px;
+    }
+.infiniteScroll{
+    overflow-x: hidden;
+}
+.container{
+    width: auto;
+    overflow-x: hidden;
+}

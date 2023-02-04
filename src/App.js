@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.module.css';
 import NaviBar from './components/Navigation/NaviBar';
-import Main from './components/Main/Main';
+import MovieList from './components/Main/MovieList';
 import Footer from './components/Footer/Footer';
 import s from "./App.module.css"
 import Filter from './components/Filter/Filter';
@@ -9,7 +9,7 @@ import Loader from './components/Loader/Loader';
 
 
 const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4";
-const API_SEARCH2="https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query";
+const API_SEARCH="https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query";
 const GENRE_API= "https://api.themoviedb.org/3/genre/movie/list?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US";
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
         event.preventDefault();
         console.log("Searching");
         try{
-            const url= API_SEARCH2 + "=" + searchText;
+            const url= API_SEARCH + "=" + searchText;
             const searchRes= await fetch(url);
             const searchData= await searchRes.json();
             console.log("search data",searchData);
@@ -92,10 +92,9 @@ function App() {
                             filterByYearValue={filterByYearValue} setFilterByYearValue={setFilterByYearValue}
                     />
 
-                    <Main filtered={filtered}/>
+                    <MovieList filtered={filtered} API_URL={API_URL} setFiltered={setFiltered}/>
 
-
-                    <Footer/>
+                    <Footer />
 
                 </div>
 
