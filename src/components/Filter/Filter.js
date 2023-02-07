@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import s from"./Filter.module.css";
+import s from './Filter.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
+
 
 const years = [
     2023,
@@ -134,70 +135,84 @@ const years = [
     1896
 ];
 
-Filter.propTypes={
-    movies:PropTypes.array,
-    genres:PropTypes.array,
-    activeGenreId:PropTypes.number,
-    setFiltered:PropTypes.func,
-    setActiveGenreId:PropTypes.func,
-    filterByYearValue:PropTypes.string,
-    setFilterByYearValue:PropTypes.func
+Filter.propTypes = {
+    movies: PropTypes.array,
+    genres: PropTypes.array,
+    activeGenreId: PropTypes.number,
+    setFiltered: PropTypes.func,
+    setActiveGenreId: PropTypes.func,
+    filterByYearValue: PropTypes.string,
+    setFilterByYearValue: PropTypes.func,
+    // filtered:PropTypes.array
 }
 
 
-function Filter ({movies, genres, activeGenreId,setFiltered,setActiveGenreId ,filterByYearValue, setFilterByYearValue }) {
+function Filter ({
+                     movies,
+                     genres,
+                     activeGenreId,
+                     setFiltered,
+                     setActiveGenreId,
+                     filterByYearValue,
+                     setFilterByYearValue,
+                     // filtered
+                 }) {
 
-    const onFilterDateValue= (event)=>{
-        setFilterByYearValue(event.target.value);
-        console.log(event.target.value);
+    const onFilterDateValue = (event) => {
+        setFilterByYearValue (event.target.value);
+        console.log (event.target.value);
     }
 
-    useEffect(()=>{
 
-        if(activeGenreId === 0 && filterByYearValue === "all" ){
-            setFiltered(movies);
 
-        } else if(activeGenreId !== 0 && filterByYearValue === "all"){
-            const filtered = movies.filter((movie)=>movie.genre_ids.includes(activeGenreId));
-            setFiltered(filtered);
-        }else if(activeGenreId === 0 && filterByYearValue ){
-            const filtered = movies.filter((movie)=> movie.release_date.slice(0,4) === filterByYearValue.toString());
-            setFiltered(filtered);
+    useEffect (() => {
+
+        if ( activeGenreId === 0 && filterByYearValue === 'all' ) {
+            setFiltered (movies);
+
+        } else if ( activeGenreId !== 0 && filterByYearValue === 'all' ) {
+            const filtered = movies.filter ((movie) => movie.genre_ids.includes (activeGenreId));
+            setFiltered (filtered);
+            console.log("Was filtered by genre",activeGenreId )
+        } else if ( activeGenreId === 0 && filterByYearValue ) {
+            const filtered = movies.filter ((movie) => movie.release_date.slice (0, 4) === filterByYearValue.toString ());
+            setFiltered (filtered);
+            console.log("Was filtered by year",filterByYearValue )
+        } else {
+            const filteredByGenre = movies.filter ((movie) => movie.genre_ids.includes (activeGenreId));
+            const filteredByAll = filteredByGenre.filter ((movie) => movie.release_date.slice(0, 4) === filterByYearValue.toString ());
+            setFiltered (filteredByAll);
+            console.log("Was filtered by all",filterByYearValue ,activeGenreId )
         }
-        else  {
-            const filteredByGenre = movies.filter((movie)=>movie.genre_ids.includes(activeGenreId));
-            const filteredByAll = filteredByGenre.filter((movie)=> movie.release_date.slice(0,4) === filterByYearValue.toString());
-            setFiltered(filteredByAll);
-        }
 
 
-    },[activeGenreId, movies, setFiltered,filterByYearValue]);
-
+    }, [activeGenreId, movies, setFiltered, filterByYearValue]);
 
 
     return (
         <div className={s.filter}>
             <div>
                 {
-                    genres.map((genre)=>(
-                            <button className={s.genreButton} key={genre.id} onClick={()=>setActiveGenreId(genre.id)}>{genre.name}</button>
+                    genres.map ((genre) => (
+                            <button className={s.genreButton} key={genre.id}
+                                    onClick={() => setActiveGenreId (genre.id)}>{genre.name}</button>
                         )
                     )
                 }
             </div>
-            <div className={s.container} style={{margin:"3px"}}>
+            <div  style={{margin: '3px'}}>
                 <>
-                    <label htmlFor="year-select" style={{color:"snow"}}>Choose a year :  </label>
+                    <label htmlFor="year-select" style={{color: 'snow'}}>Choose a year : </label>
                 </>
 
 
-                <select className={s.selectYear} name="format" id="format" onChange={onFilterDateValue}   >
-                        <option value="all" >All</option>
-                        {
-                            years.map((year)=>
-                                <option value={year} key = {year}>{year}</option>
-                            )
-                        }
+                <select className={s.selectYear} name="format" id="format" onChange={onFilterDateValue}>
+                    <option value="all">All</option>
+                    {
+                        years.map ((year) =>
+                            <option value={year} key={year}>{year}</option>
+                        )
+                    }
                 </select>
 
             </div>
@@ -206,4 +221,5 @@ function Filter ({movies, genres, activeGenreId,setFiltered,setActiveGenreId ,fi
     )
 }
 
-export  default Filter;
+
+export default Filter;

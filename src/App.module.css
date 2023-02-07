@@ -5,7 +5,9 @@ root{
 .App {
   background-color: blanchedalmond;
   margin: auto;
-
+  /*background-image: url("3670.jpg");*/
+  /*background-size: 1440px auto;*/
+  width: 100%;
 }
 
 .container{

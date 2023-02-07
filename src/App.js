@@ -35,8 +35,8 @@ function App() {
 
 
     useEffect(() => {
-        setTimeout(()=>{
-            setLoading(true)
+        const timeoutId =setTimeout(()=>{
+             setLoading(true)
             fetch(GENRE_API)
                 .then((res)=>res.json())
                 .then(data=>{
@@ -44,9 +44,12 @@ function App() {
                     setGenres(data.genres);
                     setLoading(false)
                 })
-        },1200)
+            clearTimeout(timeoutId);
+        },1200);
+
 
     }, []);
+
 
     const searchMovie = async(event)=>{
         event.preventDefault();
@@ -87,14 +90,14 @@ function App() {
 
                     <NaviBar query={searchText} searchMovie={searchMovie} changeHandler={changeHandler} />
 
-                    <Filter movies={movies} genres={genres} activeGenreId={activeGenreId}
+                    <Filter movies ={movies} filtered={filtered} genres={genres} activeGenreId={activeGenreId}
                             setActiveGenreId={setActiveGenreId} setFiltered={setFiltered}
                             filterByYearValue={filterByYearValue} setFilterByYearValue={setFilterByYearValue}
                     />
 
                     <MovieList filtered={filtered} API_URL={API_URL} setFiltered={setFiltered}/>
 
-                    <Footer />
+                    <Footer  />
 
                 </div>
 
