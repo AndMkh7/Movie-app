@@ -32,7 +32,7 @@ function MovieList ({filtered, setFiltered}) {
 
     return (
 
-        <Container>
+        <Container style={{maxWidth: '1920px', minWidth: '220px'}}>
             {filtered.length !== 0 ? (
                 <div style={{width: '100%'}}>
                     <InfiniteScroll

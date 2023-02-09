@@ -1,21 +1,22 @@
-root{
-  font-family: 'Roboto', sans-serif;
+root {
+    font-family: 'Roboto', sans-serif;
 
 }
+
 .App {
-  background-color: blanchedalmond;
-  margin: auto;
-  /*background-image: url("3670.jpg");*/
-  /*background-size: 1440px auto;*/
-  width: 100%;
+    background-color: blanchedalmond;
+    margin: auto;
+
+    width: 100%;
+
 }
 
-.container{
-  padding: 0 150px;
+.container {
+    padding: 0 150px;
 }
 
-.toolBar{
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between ;
+.toolBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

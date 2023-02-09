@@ -190,8 +190,10 @@ function Filter ({
 
 
     return (
-        <div className={s.filter}>
+        <div className={s.filter} style={{maxWidth: '1920px', minWidth: '220px'}}>
             <div>
+                <button className={s.genreButton} key={Math.random()}
+                        onClick={() => setActiveGenreId (0)}>All Movies</button>
                 {
                     genres.map ((genre) => (
                             <button className={s.genreButton} key={genre.id}
