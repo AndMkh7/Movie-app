@@ -16,7 +16,7 @@ HomePage.propTypes = {
     activeGenreId:PropTypes.number,
     setFiltered:PropTypes.func,
     setActiveGenreId:PropTypes.func,
-    filterByYearValue:PropTypes.func,
+    filterByYearValue:PropTypes.string,
     setFilterByYearValue:PropTypes.func,
     changeHandler:PropTypes.func,
     searchMovie:PropTypes.func

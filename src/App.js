@@ -83,7 +83,7 @@ function App () {
                 <div className={s.App} style={{maxWidth: '1920px', minWidth: '220px'}}>
 
                    <div>
-                       <NaviBar/>
+                       <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}/>
                    </div>
                     <div>
                         <Routes>
