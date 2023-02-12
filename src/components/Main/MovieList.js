@@ -22,7 +22,7 @@ function MovieList ({filtered, setFiltered}) {
         if ( filtered.length <= 40 ) {
             setTimeout (() => {
                 setFiltered (filtered.concat (filtered));
-            }, 2000) ;
+            }, 1000) ;
         } else {
             setHasMore (false)
         }

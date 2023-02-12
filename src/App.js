@@ -61,18 +61,24 @@ function App () {
                 console.log ('No data with your searching text')
             } else {
                 setMovies (searchData.results);
+                console.log ("searchText," , searchText)
+                setSearchText ('');
             }
 
-            setSearchText ('');
         } catch (error) {
             console.log (error);
+            setSearchText ("");
+
+        }
+        finally {
+            setSearchText ('');
+
         }
     };
 
 
     const changeHandler = (e) => {
         setSearchText (e.target.value);
-
     };
 
 
@@ -87,7 +93,7 @@ function App () {
                    </div>
                     <div>
                         <Routes>
-                            <Route path='/home' element={<HomePage movies={movies} genres={genres} filtered={filtered} searchText={searchText}
+                            <Route path='/*' element={<HomePage movies={movies} genres={genres} filtered={filtered} searchText={searchText}
                                                            loading={loading} setFiltered={setFiltered} activeGenreId={activeGenreId}
                                                            setActiveGenreId={setActiveGenreId} filterByYearValue={filterByYearValue}
                                                            setFilterByYearValue={setFilterByYearValue}  changeHandler={changeHandler}

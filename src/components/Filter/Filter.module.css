@@ -28,11 +28,6 @@
     -moz-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
     box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
 }
-.genreButton:active{
-    background-color: snow;
-    color:black;
-}
-
 
 
 .genreButton:hover{
@@ -48,8 +43,16 @@
 
 }
 
-.active{
-    background-color: red;
+.active {
+
+    background-color: snow;
+    color:black;
+    border-width:1px ;
+    opacity: 0.5;
+    margin:5px 2px ;
+    -webkit-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+    -moz-box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
+    box-shadow: 2px 2px 8px 0 rgba(237, 242, 246, 0.95);
 }
 
 .selectYear{
@@ -59,3 +62,4 @@
     opacity: 0.9;
     font-family: Dialog sans-serif italic;
 }
+

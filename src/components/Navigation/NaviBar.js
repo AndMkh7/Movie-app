@@ -11,7 +11,6 @@ NaviBar.propTypes = {
     query: PropTypes.string,
     searchMovie: PropTypes.func,
     changeHandler: PropTypes.func,
-
 }
 
 
@@ -24,8 +23,7 @@ function NaviBar ({query, searchMovie, changeHandler}) {
                     <Navbar bg="dark" expand="lg" variant="dark" style={{maxWidth: '1920px', minWidth: '220px'}}>
                         <Container fluid style={{minWidth: '200px'}}>
                             <Nav className="me-auto">
-                                <Navbar.Brand href="/home">Home</Navbar.Brand>
-                                <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                                <Navbar.Brand href="/">Home</Navbar.Brand>
                                 <Nav.Link as={Link} to="/home">Trending</Nav.Link>
                                 <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
                             </Nav>
@@ -60,8 +58,6 @@ function NaviBar ({query, searchMovie, changeHandler}) {
                     </Navbar>
 
                 </>
-
-
 
             </div>
     );
