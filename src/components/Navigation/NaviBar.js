@@ -3,8 +3,7 @@ import './NaviBar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import {  Link  } from 'react-router-dom';
-
+import {  Link   } from 'react-router-dom';
 
 
 NaviBar.propTypes = {
@@ -12,6 +11,8 @@ NaviBar.propTypes = {
     searchMovie: PropTypes.func,
     changeHandler: PropTypes.func,
 }
+
+
 
 
 function NaviBar ({query, searchMovie, changeHandler}) {
@@ -24,7 +25,7 @@ function NaviBar ({query, searchMovie, changeHandler}) {
                         <Container fluid style={{minWidth: '200px'}}>
                             <Nav className="me-auto">
                                 <Navbar.Brand href="/">Home</Navbar.Brand>
-                                <Nav.Link as={Link} to="/home">Trending</Nav.Link>
+                                <Nav.Link as={Link} to="/">Trending</Nav.Link>
                                 <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
                             </Nav>
 
@@ -47,8 +48,14 @@ function NaviBar ({query, searchMovie, changeHandler}) {
                                     </FormControl>
                                     <Button variant="secondary" type="submit" className="me-2">Search</Button>
                                     <Nav>
-                                        <Button variant="primary" className=" me-2  border-warning">LogIn</Button>
-                                        <Button variant="primary" className=" me-2  border-warning">LogOut</Button>
+                                        <Link to="/login">
+                                            <Button variant="primary" className=" me-2  border-warning">LogIn</Button>
+                                        </Link>
+
+                                        <Link to="/signup">
+                                            <Button variant="primary" className=" me-2  border-warning" >SignUp</Button>
+                                        </Link>
+
                                     </Nav>
 
                                 </Form>

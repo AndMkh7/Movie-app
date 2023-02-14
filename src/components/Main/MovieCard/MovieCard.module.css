@@ -1,8 +1,9 @@
 .movieCard{
     display: flex;
     flex-direction: column;
-    margin : 10px 25px 25px 10px;
-
+    position: center;
+    margin : 10px 10px 25px 10px;
+    width: 10rem;
 }
 
 .movieCardData{
@@ -10,6 +11,9 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
+
+
+
 }
 
 .movieCardData:hover{
@@ -17,8 +21,21 @@
     transform: scale(1.05);
     transition: 0.7s;
 }
+.movieCardData:hover .overlay{
+    opacity: 1;
+}
 
-
+.overlay{
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    width: 100%;
+    transition: 0.5s ease;
+    opacity: 0;
+    bottom: 0;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
 
 .img{
     width:10rem;
@@ -65,7 +82,7 @@
     margin: 5px 4px 5px 0;
 }
 
-.rateAqua{
+.highRate{
     font-size: 15px;
     font-weight: bolder;
     margin: 5px 4px 5px 0;

@@ -10,12 +10,11 @@ import { LoadMore } from '../Loader/Loader';
 
 MovieList.propTypes = {
     filtered: PropTypes.array,
-    API_URL: PropTypes.string,
     setFiltered: PropTypes.func,
 };
 
 
-function MovieList ({filtered, setFiltered}) {
+function MovieList ({filtered, setFiltered,}) {
     const [hasMore, setHasMore] = useState (true);
 
     const fetchMoreData = () => {
@@ -44,8 +43,8 @@ function MovieList ({filtered, setFiltered}) {
                         <div className={s.infiniteScroll}>
                             <Row className={s.container} style={{overflowX: 'hidden'}}>
                                 {filtered.map ((movie) => (
-                                    <Col xs={12} sm={6} md={4} lg={3} key={movie.id * Math.random()}>
-                                        <MovieCard {...movie} />
+                                    <Col  xs={12} sm={6} md={4} lg={3} key={movie.id * Math.random()}>
+                                        <MovieCard {...movie}  />
                                     </Col>
                                 ))}
                             </Row>

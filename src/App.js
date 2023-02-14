@@ -1,9 +1,11 @@
-import React , {useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './App.module.css'
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Favourites from './components/Favourites/Favourites';
-import HomePage from './HomePage/HomePage';
+import HomePage from './components/HomePage/HomePage';
 import NaviBar from './components/Navigation/NaviBar';
+import Login from './components/Login/Login';
+import Signup from './components/SignUp/Signup';
 
 
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
@@ -49,6 +51,7 @@ function App () {
     }, []);
 
 
+
     const searchMovie = async (event) => {
         event.preventDefault ();
         console.log ('Searching');
@@ -61,16 +64,15 @@ function App () {
                 console.log ('No data with your searching text')
             } else {
                 setMovies (searchData.results);
-                console.log ("searchText," , searchText)
+                console.log ('searchText,', searchText)
                 setSearchText ('');
             }
 
         } catch (error) {
             console.log (error);
-            setSearchText ("");
+            setSearchText ('');
 
-        }
-        finally {
+        } finally {
             setSearchText ('');
 
         }
@@ -85,25 +87,33 @@ function App () {
     return (
 
 
-            <BrowserRouter>
-                <div className={s.App} style={{maxWidth: '1920px', minWidth: '220px'}}>
+        <BrowserRouter>
+            <div className={s.App} style={{maxWidth: '1920px', minWidth: '220px'}}>
 
-                   <div>
-                       <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}/>
-                   </div>
-                    <div>
-                        <Routes>
-                            <Route path='/*' element={<HomePage movies={movies} genres={genres} filtered={filtered} searchText={searchText}
-                                                           loading={loading} setFiltered={setFiltered} activeGenreId={activeGenreId}
-                                                           setActiveGenreId={setActiveGenreId} filterByYearValue={filterByYearValue}
-                                                           setFilterByYearValue={setFilterByYearValue}  changeHandler={changeHandler}
-                                                           searchMovie={searchMovie} API_URL={API_URL}/>}/>
-                            <Route path="/favourites" element={<Favourites/>}/>
-                        </Routes>
-                    </div>
-
+                <div>
+                    <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}/>
                 </div>
-            </BrowserRouter>
+                <div>
+                    <Routes>
+                        <Route index element={<HomePage movies={movies} genres={genres} filtered={filtered}
+                                                        searchText={searchText}
+                                                        loading={loading} setFiltered={setFiltered}
+                                                        activeGenreId={activeGenreId}
+                                                        setActiveGenreId={setActiveGenreId}
+                                                        filterByYearValue={filterByYearValue}
+                                                        setFilterByYearValue={setFilterByYearValue}
+                                                        changeHandler={changeHandler}
+                                                        searchMovie={searchMovie} API_URL={API_URL}/>}
+                        />
+
+                        <Route path="/favourites" element={<Favourites/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/signup" element={<Signup/>}/>
+                    </Routes>
+                </div>
+
+            </div>
+        </BrowserRouter>
 
 
     );
