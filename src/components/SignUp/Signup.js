@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import {collection,addDoc} from 'firebase/firestore';
-// import { db } from "../../firebase-config";
-import {useNavigate} from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+
 
 const Signup = () => {
     const [user, setUser] = useState ({name: '', surname: '', login: '', password: ''});
-    const [error,setError] = useState("");
-    const auth = getAuth();
-    const navigate = useNavigate();
+    const [error, setError] = useState ('');
+    const auth = getAuth ();
+    const navigate = useNavigate ();
 
-    const handleSubmit = event=> {
+    const handleSubmit = event => {
+
         event.preventDefault ();
         createUserWithEmailAndPassword (auth, user.login, user.password)
             .then (res => {
-                console.log ("success", res.user.uid)
-                setError ("");
-                navigate("/")
+                console.log ('success', res.user.uid)
+                setError ('');
+                navigate ('/login')
             })
-            .catch(err=>{
-                setError(err.message)
+            .catch (err => {
+                setError (err.message)
             })
     }
 
     return (
-        <div style={{padding:"30px",display:'grid',gap:"10px"}}>
-            {error && <p style={{color:"red",fontSize:"30px",fontWeight:"bolder"}}>{error}</p>}
-            <form onSubmit={handleSubmit} style={{padding:"30px",display:'grid',gap:"10px"}}>
+        <div style={{padding: '30px', display: 'grid', gap: '10px'}}>
+
+            {error && <p style={{color: 'red', fontSize: '30px', fontWeight: 'bolder'}}>{error}</p>}
+            <h4>Please fill in the registration fields !!!</h4>
+            <form onSubmit={handleSubmit} style={{padding: '30px', display: 'grid', gap: '10px'}}>
                 <div>
                     <TextField
                         label="name"
@@ -42,21 +44,21 @@ const Signup = () => {
                 </div>
                 <div>
                     <TextField
-                        label="login"
-                        required
+                        label="email"
+                        required="true"
                         value={user.login}
                         onChange={e => setUser ({...user, login: e.target.value})}/>
                 </div>
                 <div>
                     <TextField
                         label="password"
-                        required
-                        type='password'
+                        required="true"
+                        type="password"
                         value={user.password}
                         onChange={e => setUser ({...user, password: e.target.value})}/>
                 </div>
                 <div>
-                    <Button type="submit" >Register</Button>
+                    <Button type="submit" style={{border: 'solid'}}>Register</Button>
                 </div>
             </form>
         </div>

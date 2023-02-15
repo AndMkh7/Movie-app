@@ -22,6 +22,7 @@ function App () {
     const [activeGenreId, setActiveGenreId] = useState (0);
     const [filterByYearValue, setFilterByYearValue] = useState ('all');
     const [loading, setLoading] = useState (false);
+    const [isLoggedIn, setIsLoggedIn] = useState (false);
 
 
     useEffect (() => {
@@ -49,7 +50,6 @@ function App () {
 
 
     }, []);
-
 
 
     const searchMovie = async (event) => {
@@ -91,7 +91,8 @@ function App () {
             <div className={s.App} style={{maxWidth: '1920px', minWidth: '220px'}}>
 
                 <div>
-                    <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}/>
+                    <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}
+                             isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
                 </div>
                 <div>
                     <Routes>
@@ -107,7 +108,7 @@ function App () {
                         />
 
                         <Route path="/favourites" element={<Favourites/>}/>
-                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/signup" element={<Signup/>}/>
                     </Routes>
                 </div>
