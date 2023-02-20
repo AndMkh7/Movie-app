@@ -32,11 +32,11 @@ function MoviePage () {
 
                 </div>
                 <div >
-                    <h2>{movie.title}</h2>
+                    <h2 className={s.header}>{movie.title}</h2>
                     <p>{movie.overview}</p>
-                    <p><b>Runtime</b> : {movie.runtime} minutes</p>
-                    <p><b>Release</b> date : {movie.release_date}</p>
-                    <p> <b>Rating</b> : {movie.vote_average}</p>
+                    <p><b  style={{ textDecoration: 'underline solid rgba(255, 127, 252, 0.79)' }}>Runtime</b> : {movie.runtime} minutes</p>
+                    <p><b  style={{ textDecoration: 'underline solid rgba(255, 127, 252, 0.79)' }}>Release date</b>  : {movie.release_date}</p>
+                    <p> <b  style={{ textDecoration: 'underline solid rgba(255, 127, 252, 0.79)' }}>Rating</b> : {movie.vote_average}</p>
 
 
                 </div>

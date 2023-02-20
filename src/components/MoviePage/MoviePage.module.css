@@ -5,4 +5,14 @@
     height: auto;
     margin-right: 30px;
     padding-left: 5px;
+    /*color: #31d2f2;*/
+    color: aquamarine;
+    font-family: 'Roboto', sans-serif , italic;
+    font-style: italic;
+}
+
+.header{
+    text-decoration: underline solid rgba(255, 127, 252, 0.79);
+    font-style: normal;
+    text-shadow: -1px -1px 1px rgba(255, 127, 252, 0.79), 1px 1px 1px rgba(0,0,0,.5);
 }

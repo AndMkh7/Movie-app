@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-
+import usersPhoto from "../../images/user.png";
 
 NaviBar.propTypes = {
     query: PropTypes.string,
@@ -41,9 +41,9 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                 <Navbar bg="dark" expand="lg" variant="dark" style={{maxWidth: '1920px', minWidth: '220px'}}>
                     <Container fluid style={{minWidth: '200px'}}>
                         <Nav className="me-auto">
-                            <Navbar.Brand href="/">Home</Navbar.Brand>
-                            <Nav.Link as={Link} to="/">Home</Nav.Link>
-                            <Nav.Link as={Link} to="/">Trending</Nav.Link>
+                            <Navbar.Brand href="/home">Home</Navbar.Brand>
+                            <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/home">Trending</Nav.Link>
                             {
                                 isLoggedIn && <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
                             }
@@ -72,11 +72,16 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
 
                                     {
                                         isLoggedIn ?
-                                            <Link to="/logout">
-                                                {error && <h4>{error}</h4>}
-                                                <Button variant="primary" className=" me-2  border-warning"
-                                                        onClick={handleLogout}>LogOut</Button>
-                                            </Link> :
+                                            <>
+                                                <Link to="/logout">
+                                                    {error && <h4>{error}</h4>}
+                                                    <Button variant="primary" className=" me-2  border-warning"
+                                                            onClick={handleLogout}>LogOut</Button>
+                                                </Link>
+                                                <img src={usersPhoto} alt={"User`s image"} width="30" height="35" />
+                                            </>
+
+                                            :
                                             <>
                                                 <Link to="/login">
                                                     <Button variant="primary"

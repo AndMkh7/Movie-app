@@ -143,7 +143,6 @@ Filter.propTypes = {
     setActiveGenreId: PropTypes.func,
     filterByYearValue: PropTypes.string,
     setFilterByYearValue: PropTypes.func,
-    // filtered:PropTypes.array
 }
 
 
@@ -155,7 +154,6 @@ function Filter ({
                      setActiveGenreId,
                      filterByYearValue,
                      setFilterByYearValue,
-                     // filtered
                  }) {
 
     const onFilterDateValue = (event) => {

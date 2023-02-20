@@ -1,28 +1,22 @@
 .movieCard{
-    display: flex;
-    flex-direction: column;
-    position: center;
-    margin : 10px 10px 25px 10px;
-    width: 10rem;
+    padding : 10px 10px 25px 10px;
+    width: 8rem;
 }
 
 .movieCardData{
     width: 10rem;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-
-
-
 }
 
 .movieCardData:hover{
     border-color: tomato;
-    transform: scale(1.05);
+    transform: scale(1.05) ;
     transition: 0.7s;
+    opacity: 50%;
 }
 .movieCardData:hover .overlay{
-    opacity: 1;
+    opacity: 10%;
 }
 
 .overlay{
@@ -44,6 +38,8 @@
     box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
     -webkit-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
     -moz-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
+    /*cursor: pointer;*/
+
 }
 
 .title{
@@ -54,13 +50,11 @@
     margin-bottom: 3px;
     height: 30px;
     position: static;
-    color:midnightblue;
+    color:snow;
 }
 
 .aboutMovie{
     width: 10rem;
-
-    /*width: 10rem;*/
     display: flex;
     flex-direction: row;
     justify-content:space-between;
