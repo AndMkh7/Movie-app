@@ -6,6 +6,8 @@ import HomePage from './components/HomePage/HomePage';
 import NaviBar from './components/Navigation/NaviBar';
 import Login from './components/Login/Login';
 import Signup from './components/SignUp/Signup';
+import MoviePage from './components/MoviePage/MoviePage';
+import NotFound from './components/NotFound/NotFound';
 
 
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
@@ -88,7 +90,7 @@ function App () {
 
 
         <BrowserRouter>
-            <div className={s.App} style={{maxWidth: '1920px', minWidth: '220px'}}>
+            <div className={s.App} style={{maxWidth: '1920px', minWidth: '300px'}}>
 
                 <div>
                     <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}
@@ -96,20 +98,22 @@ function App () {
                 </div>
                 <div>
                     <Routes>
-                        <Route index element={<HomePage movies={movies} genres={genres} filtered={filtered}
-                                                        searchText={searchText}
-                                                        loading={loading} setFiltered={setFiltered}
-                                                        activeGenreId={activeGenreId}
-                                                        setActiveGenreId={setActiveGenreId}
-                                                        filterByYearValue={filterByYearValue}
-                                                        setFilterByYearValue={setFilterByYearValue}
-                                                        changeHandler={changeHandler}
-                                                        searchMovie={searchMovie} API_URL={API_URL}/>}
+                        <Route path="/home" element={<HomePage movies={movies} genres={genres} filtered={filtered}
+                                                               searchText={searchText}
+                                                               loading={loading} setFiltered={setFiltered}
+                                                               activeGenreId={activeGenreId}
+                                                               setActiveGenreId={setActiveGenreId}
+                                                               filterByYearValue={filterByYearValue}
+                                                               setFilterByYearValue={setFilterByYearValue}
+                                                               changeHandler={changeHandler}
+                                                               searchMovie={searchMovie} API_URL={API_URL}/>}
                         />
 
                         <Route path="/favourites" element={<Favourites/>}/>
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/signup" element={<Signup/>}/>
+                        <Route path="/movie/:id" element={<MoviePage/>}/>
+                        <Route path="*" element={<NotFound/>}/>
                     </Routes>
                 </div>
 

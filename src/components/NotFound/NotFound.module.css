@@ -1,0 +1,39 @@
+.container {
+    background-color: #161616;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col {
+    text-align: center;
+}
+
+.title {
+    color: #fff;
+    font-size: 6rem;
+    margin-bottom: 2rem;
+}
+
+.text {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.button {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    padding: 0.8rem 2.5rem;
+}

@@ -3,7 +3,10 @@
     overflow-x: hidden;
 }
 .container{
+    position:relative;
     width: auto;
     overflow-x: hidden;
+    display: flex;
+    justify-content:center ;
 }
 
