@@ -4,8 +4,13 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import s from "./Signup.module.css"
 import Footer from '../Footer/Footer';
+import PropTypes from 'prop-types';
 
-const Signup = () => {
+Signup.propTypes = {
+    setIsLoggedIn: PropTypes.func
+}
+
+function Signup  ({setIsLoggedIn})  {
     const [user, setUser] = useState ({name: '', surname: '', login: '', password: ''});
     const [error, setError] = useState ('');
     const auth = getAuth ();
@@ -19,8 +24,9 @@ const Signup = () => {
         createUserWithEmailAndPassword (auth, user.login, user.password)
             .then (res => {
                 console.log ('success', res.user.uid)
+                setIsLoggedIn(true);
                 setError ('');
-                navigate ('/login')
+                navigate ('/home')
             })
             .catch (err => {
                 setError (err.message)
@@ -49,14 +55,14 @@ const Signup = () => {
                     <div>
                         <TextField
                             label="email"
-                            required="true"
+                            required={true}
                             value={user.login}
                             onChange={e => setUser ({...user, login: e.target.value})}/>
                     </div>
                     <div>
                         <TextField
                             label="password"
-                            required="true"
+                            required={true}
                             type="password"
                             value={user.password}
                             onChange={e => setUser ({...user, password: e.target.value})}/>

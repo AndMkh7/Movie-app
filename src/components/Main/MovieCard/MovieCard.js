@@ -10,6 +10,7 @@ MovieCard.propTypes = {
     poster_path: PropTypes.string,
     release_date: PropTypes.string,
     vote_average: PropTypes.number,
+    addFavouriteMovie: PropTypes.func,
     overview: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
 }
@@ -17,12 +18,14 @@ MovieCard.propTypes = {
 const API_IMG = 'https://image.tmdb.org/t/p/w500';
 
 
-function MovieCard ({title, poster_path, release_date, vote_average, id}) {
+function MovieCard ({title, poster_path, release_date, vote_average, id, addFavouriteMovie}) {
 
     const navigate = useNavigate ();
     const handleClick = () => {
         navigate (`/movie/${id}`)
     }
+
+
 
     return (
 
@@ -33,7 +36,7 @@ function MovieCard ({title, poster_path, release_date, vote_average, id}) {
                     <div className={s.title}>{title}</div>
                     <div style={{position: 'relative'}}>
                         <img className={s.img} src={API_IMG + poster_path} alt={title} onClick={handleClick}/>
-                        <AddToFavourites/>
+                        <AddToFavourites addFavouriteMovie={addFavouriteMovie}/>
                     </div>
                     <div className={s.aboutMovie}>
                         <div className={s.date}>{release_date}</div>
@@ -41,6 +44,8 @@ function MovieCard ({title, poster_path, release_date, vote_average, id}) {
                     </div>
                 </div>
             </Link>
+
+            <button onClick={()=>addFavouriteMovie()}> AddToFav</button>
 
         </div>
     )

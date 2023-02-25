@@ -3,7 +3,7 @@ import './NaviBar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import usersPhoto from "../../images/user.png";
@@ -43,7 +43,7 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                         <Nav className="me-auto">
                             <Navbar.Brand href="/home">Home</Navbar.Brand>
                             <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                            <Nav.Link as={Link} to="/home">Trending</Nav.Link>
+                            <Nav.Link as={Link} to="/trending">Trending</Nav.Link>
                             {
                                 isLoggedIn && <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
                             }
@@ -108,7 +108,7 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                 </Navbar>
 
             </>
-
+            <Outlet/>
         </div>
     );
 }

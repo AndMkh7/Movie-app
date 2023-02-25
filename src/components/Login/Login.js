@@ -7,7 +7,6 @@ import s from "./Login.module.css";
 import Footer from '../Footer/Footer';
 
 Login.propTypes = {
-    isLoggedIn: PropTypes.bool,
     setIsLoggedIn: PropTypes.func
 }
 
@@ -23,8 +22,8 @@ function Login ({setIsLoggedIn}) {
         event.preventDefault ();
         signInWithEmailAndPassword (auth, user.login, user.password)
             .then (() => {
-                    navigate ('/home')
-                    setIsLoggedIn (true)
+                setIsLoggedIn (true);
+                navigate ('/home')
                 }
             )
             .catch ((err) =>

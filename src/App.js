@@ -25,6 +25,7 @@ function App () {
     const [filterByYearValue, setFilterByYearValue] = useState ('all');
     const [loading, setLoading] = useState (false);
     const [isLoggedIn, setIsLoggedIn] = useState (false);
+    const [favourites, setFavourites] = useState ([]);
 
 
     useEffect (() => {
@@ -85,11 +86,21 @@ function App () {
         setSearchText (e.target.value);
     };
 
+    const addFavouriteMovie = (movie) => {
+
+        const newFavouritesList = [...favourites, movie];
+        setFavourites (newFavouritesList);
+        console.log ('Added to Favourites');
+        alert ('Added to Favourites');
+    }
+
 
     return (
 
 
         <BrowserRouter>
+
+
             <div className={s.App} style={{maxWidth: '1920px', minWidth: '300px'}}>
 
                 <div>
@@ -98,20 +109,37 @@ function App () {
                 </div>
                 <div>
                     <Routes>
-                        <Route path="/home" element={<HomePage movies={movies} genres={genres} filtered={filtered}
-                                                               searchText={searchText}
-                                                               loading={loading} setFiltered={setFiltered}
-                                                               activeGenreId={activeGenreId}
-                                                               setActiveGenreId={setActiveGenreId}
-                                                               filterByYearValue={filterByYearValue}
-                                                               setFilterByYearValue={setFilterByYearValue}
-                                                               changeHandler={changeHandler}
-                                                               searchMovie={searchMovie} API_URL={API_URL}/>}
+
+                        <Route index path="/home" element={<HomePage movies={movies} genres={genres} filtered={filtered}
+                                                                     searchText={searchText}
+                                                                     loading={loading} setFiltered={setFiltered}
+                                                                     activeGenreId={activeGenreId}
+                                                                     setActiveGenreId={setActiveGenreId}
+                                                                     filterByYearValue={filterByYearValue}
+                                                                     setFilterByYearValue={setFilterByYearValue}
+                                                                     changeHandler={changeHandler}
+                                                                     searchMovie={searchMovie} API_URL={API_URL}
+                                                                     addFavouriteMovie={addFavouriteMovie}
+                        />}
+
+                        />
+                        <Route path="/trending" element={<HomePage movies={movies} genres={genres} filtered={filtered}
+                                                                   searchText={searchText}
+                                                                   loading={loading} setFiltered={setFiltered}
+                                                                   activeGenreId={activeGenreId}
+                                                                   setActiveGenreId={setActiveGenreId}
+                                                                   filterByYearValue={filterByYearValue}
+                                                                   setFilterByYearValue={setFilterByYearValue}
+                                                                   changeHandler={changeHandler}
+                                                                   searchMovie={searchMovie} API_URL={API_URL}
+                                                                   addFavouriteMovie={addFavouriteMovie}
+                        />}
                         />
 
-                        <Route path="/favourites" element={<Favourites/>}/>
+                        <Route path="/favourites" element={<Favourites isLoggedIn={isLoggedIn} favourites={favourites}
+                                                                       API_URL={API_URL}/>}/>
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-                        <Route path="/signup" element={<Signup/>}/>
+                        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/movie/:id" element={<MoviePage/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>

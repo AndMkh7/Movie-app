@@ -1,7 +1,6 @@
 import React from 'react';
 import MovieList from '../Main/MovieList';
 import Footer from '../Footer/Footer';
-import s from './HomePage.module.css'
 import Filter from '../Filter/Filter';
 import Loader from '../Loader/Loader';
 import PropTypes from 'prop-types';
@@ -21,39 +20,33 @@ HomePage.propTypes = {
     setFilterByYearValue: PropTypes.func,
     changeHandler: PropTypes.func,
     searchMovie: PropTypes.func,
+    addFavouriteMovie: PropTypes.func,
 }
 
 
-function HomePage ({
-                       API_URL, movies, genres, filtered, loading, activeGenreId,
-                       filterByYearValue, setFiltered, setActiveGenreId, setFilterByYearValue,
+function HomePage ({ API_URL, movies, genres, filtered, loading, activeGenreId,
+                       filterByYearValue, setFiltered, setActiveGenreId, setFilterByYearValue, addFavouriteMovie
                    }) {
 
-
-    return (
+      return (
 
         loading ? <Loader loading={loading}/> :
-            <div className={s.homePage}>
-
-                <div className={s.container}>
-
-
+            <div>
+                <div>
                     <Filter movies={movies} filtered={filtered} genres={genres} activeGenreId={activeGenreId}
                             setActiveGenreId={setActiveGenreId} setFiltered={setFiltered}
                             filterByYearValue={filterByYearValue} setFilterByYearValue={setFilterByYearValue}
                     />
 
-                    <MovieList filtered={filtered} API_URL={API_URL} setFiltered={setFiltered}/>
+
+
+                    <MovieList filtered={filtered} API_URL={API_URL} setFiltered={setFiltered}
+                               addFavouriteMoviе={addFavouriteMovie}/>
 
                     <Footer/>
-
                 </div>
-
             </div>
-
-
     );
 }
 
- 
 export default HomePage;

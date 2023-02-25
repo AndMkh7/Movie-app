@@ -8,7 +8,7 @@ function NotFound () {
     const navigate = useNavigate ();
     const handleClick = () => {
         alert ('kkk')
-        navigate ('/home');
+        navigate ('/');
     }
     return (
         <Container fluid className={s.container}>
@@ -20,7 +20,7 @@ function NotFound () {
                         homepage.
                     </p>
                     <Link to="/" className={s.link}>
-                        <Button variant="outline-light" className={s.button} onClick={handleClick}>
+                        <Button variant="outline-light" className={s.button} onClick={()=>handleClick()}>
                             Go back to homepage
                         </Button>
                     </Link>

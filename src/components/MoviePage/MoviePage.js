@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import s from './MoviePage.module.css';
+import Loader from '../Loader/Loader';
 
 
 function MoviePage () {
@@ -14,36 +15,48 @@ function MoviePage () {
             .then ((res) => res.json ())
             .then (data => {
                 setMovie (data);
-                data.genres.map((genre)=>genre.name)
 
             })
-            .catch((error)=><h1>{error}</h1>)
+            .catch ((error) => <h1>{error}</h1>)
 
     }, []);
 
+    const {poster_path, title,  overview, runtime, release_date, vote_average} = movie ;
+
+    console.log("5555555555",vote_average)
+        return (
+            <>
+                {
+                    !vote_average ? <Loader/> :
+                        <div>
+                            <div className={s.movieInfo}>
+                                <div>
+                                    <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title}
+                                         style={{maxWidth: '100%', height: 'auto', objectFit: 'cover'}}/>
+
+                                </div>
+                                <div>
+                                    <h2 className={s.header}>{title}</h2>
+                                    <p>{overview}</p>
+                                    <p><b
+                                        style={{textDecoration: 'underline solid rgba(255, 127, 252, 0.79)'}}>Runtime</b> : {runtime} minutes
+                                    </p>
+                                    <p><b style={{textDecoration: 'underline solid rgba(255, 127, 252, 0.79)'}}>Release
+                                        date</b> : {release_date}</p>
+                                    <p><b
+                                        style={{textDecoration: 'underline solid rgba(255, 127, 252, 0.79)'}}>Rating</b> : {vote_average.toFixed(1)}
+                                    </p>
 
 
-    return (
-        <div>
-            <div className={s.movieInfo}>
-                <div>
-                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title}
-                         style={{maxWidth: '100%', height: 'auto', objectFit: 'cover'}}/>
+                                </div>
+                            </div>
+                            <Footer/>
 
-                </div>
-                <div >
-                    <h2 className={s.header}>{movie.title}</h2>
-                    <p>{movie.overview}</p>
-                    <p><b  style={{ textDecoration: 'underline solid rgba(255, 127, 252, 0.79)' }}>Runtime</b> : {movie.runtime} minutes</p>
-                    <p><b  style={{ textDecoration: 'underline solid rgba(255, 127, 252, 0.79)' }}>Release date</b>  : {movie.release_date}</p>
-                    <p> <b  style={{ textDecoration: 'underline solid rgba(255, 127, 252, 0.79)' }}>Rating</b> : {movie.vote_average}</p>
+                        </div>
+                }
+            </>
 
 
-                </div>
-            </div>
-            <Footer/>
-
-        </div>
     );
 }
 

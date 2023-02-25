@@ -1,13 +1,20 @@
 import React from 'react';
 import s from "./AddToFavourites.module.css"
+import PropTypes from 'prop-types';
 // import {db} from "./../../firebase-config";
 // import { collection} from "firebase/firestore";
 
 
-function AddToFavourites () {
+
+AddToFavouritesBtn.propTypes = {
+    addFavouriteMovie: PropTypes.func,
+    movie:PropTypes.object,
+};
+
+function AddToFavouritesBtn ({addFavouriteMovie,movie}) {
     // const usersList = collection(db , "users")
     return (
-        <button className={s.button} onClick={() => alert ('Added to Favorite List')} >
+        <button className={s.button} onClick={()=> addFavouriteMovie(movie)} >
 
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -24,4 +31,4 @@ function AddToFavourites () {
 }
 
 
-export default AddToFavourites;
+export default AddToFavouritesBtn;
