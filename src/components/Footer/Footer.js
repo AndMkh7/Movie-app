@@ -1,12 +1,14 @@
 import React from 'react';
-import s from "./Footer.module.css"
+import s from './Footer.module.css'
 import PropTypes from 'prop-types';
 
-Footer.propTypes={
-    filtered:PropTypes.array,
-    API_URL:PropTypes.string,
-    setFiltered:PropTypes.func,
+
+Footer.propTypes = {
+    filtered: PropTypes.array,
+    API_URL: PropTypes.string,
+    setFiltered: PropTypes.func,
 };
+
 
 function Footer () {
 
@@ -20,4 +22,5 @@ function Footer () {
     )
 }
 
-export  default Footer;
+
+export default Footer;

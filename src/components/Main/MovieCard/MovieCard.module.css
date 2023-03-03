@@ -7,6 +7,7 @@
     width: 10rem;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .movieCardData:hover{
@@ -44,13 +45,17 @@
 
 .title{
     width: 10rem;
-    font-size: 12px;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
     font-family: Inconsolata, sans-serif;
     margin-top:15px;
-    margin-bottom: 3px;
+    margin-bottom: 15px;
     height: 30px;
     position: static;
-    color:snow;
+    color:coral;
+    text-shadow: #3dd5f3;
+    text-align: center;
 }
 
 .aboutMovie{

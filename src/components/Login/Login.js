@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import s from "./Login.module.css";
+import s from './Login.module.css';
 import Footer from '../Footer/Footer';
+
 
 Login.propTypes = {
     setIsLoggedIn: PropTypes.func
@@ -22,8 +23,9 @@ function Login ({setIsLoggedIn}) {
         event.preventDefault ();
         signInWithEmailAndPassword (auth, user.login, user.password)
             .then (() => {
-                setIsLoggedIn (true);
-                navigate ('/home')
+                    setIsLoggedIn (true);
+                    console.log ('This user logged in', user.login)
+                    navigate ('/home')
                 }
             )
             .catch ((err) =>
@@ -34,8 +36,10 @@ function Login ({setIsLoggedIn}) {
     return (
         <>
             <div className={s.login}>
-                <h3>Sign in</h3>
-                <Box sx={{width: 3/4 , maxWidth:"450px", minWidth:"230px"}} >
+                <h3>Sign in or go to <Link to="/home"
+                                           style={{fontSize: '25px', fontStyle: 'italic', textDecoration: 'none'}}>Home
+                    page</Link> for anonymous mode </h3>
+                <Box sx={{width: 3 / 4, maxWidth: '450px', minWidth: '230px'}}>
                     {error && <h4>{error}</h4>}
                     <form onSubmit={handleSubmit} style={{padding: '30px', display: 'grid', gap: '10px'}}>
                         <div>
@@ -57,8 +61,13 @@ function Login ({setIsLoggedIn}) {
                                 onChange={e => setUser ({...user, password: e.target.value})}
                             />
                         </div>
-                        <div>
+                        <div style={{display: 'flex', gap: '20px'}}>
+
                             <Button variant="contained" type="submit">Login</Button>
+
+                            <h3><Link to="/signup" style={{fontSize: '25px', textDecoration: 'none'}}>or Create
+                                Account</Link></h3>
+
                         </div>
 
                     </form>

@@ -24,11 +24,12 @@ HomePage.propTypes = {
 }
 
 
-function HomePage ({ API_URL, movies, genres, filtered, loading, activeGenreId,
+function HomePage ({
+                       API_URL, movies, genres, filtered, loading, activeGenreId,
                        filterByYearValue, setFiltered, setActiveGenreId, setFilterByYearValue, addFavouriteMovie
                    }) {
 
-      return (
+    return (
 
         loading ? <Loader loading={loading}/> :
             <div>
@@ -39,14 +40,14 @@ function HomePage ({ API_URL, movies, genres, filtered, loading, activeGenreId,
                     />
 
 
-
                     <MovieList filtered={filtered} API_URL={API_URL} setFiltered={setFiltered}
-                               addFavouriteMoviе={addFavouriteMovie}/>
+                               addFavouriteMovie={addFavouriteMovie}/>
 
                     <Footer/>
                 </div>
             </div>
     );
 }
+
 
 export default HomePage;

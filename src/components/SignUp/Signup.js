@@ -2,30 +2,47 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import s from "./Signup.module.css"
+import s from './Signup.module.css'
 import Footer from '../Footer/Footer';
 import PropTypes from 'prop-types';
+import { setDoc, doc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
+
 
 Signup.propTypes = {
-    setIsLoggedIn: PropTypes.func
+    setIsLoggedIn: PropTypes.func,
+    favourites: PropTypes.array
 }
 
-function Signup  ({setIsLoggedIn})  {
-    const [user, setUser] = useState ({name: '', surname: '', login: '', password: ''});
+
+function Signup ({setIsLoggedIn}) {
+    const [user, setUser] = useState ({name: '', surname: '', login: '', password: '', favourites :[]});
     const [error, setError] = useState ('');
     const auth = getAuth ();
     const navigate = useNavigate ();
 
 
 
+    // const userList = collection (db, 'users')
+
     const handleSubmit = event => {
 
         event.preventDefault ();
         createUserWithEmailAndPassword (auth, user.login, user.password)
-            .then (res => {
+            .then (async res => {
                 console.log ('success', res.user.uid)
-                setIsLoggedIn(true);
+
+                const userList = doc(db, "users", res.user.uid);
+
+                await (setDoc (userList, {
+                    name: user.name,
+                    surname: user.surname,
+                    favourites: user.favourites,
+                    userId: res.user.uid
+                }));
+                setIsLoggedIn (true);
                 setError ('');
+
                 navigate ('/home')
             })
             .catch (err => {
@@ -35,7 +52,7 @@ function Signup  ({setIsLoggedIn})  {
 
     return (
         <>
-            <div className={s.signup} >
+            <div className={s.signup}>
 
                 {error && <p style={{color: 'red', fontSize: '30px', fontWeight: 'bolder'}}>{error}</p>}
                 <h4>Please fill in the registration fields !!!</h4>
@@ -77,5 +94,6 @@ function Signup  ({setIsLoggedIn})  {
 
     )
 }
+
 
 export default Signup;

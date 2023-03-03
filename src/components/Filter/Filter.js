@@ -191,12 +191,13 @@ function Filter ({
 
 
             <div>
-                <button className={`${s.genreButton } ${activeGenreId === 0 ? s.active : ''}`} key={Math.random ()}
+                <button className={`${s.genreButton} ${activeGenreId === 0 ? s.active : ''}`} key={Math.random ()}
                         onClick={() => setActiveGenreId (0)}>All Movies
                 </button>
                 {
                     genres.map ((genre) => (
-                            <button className={`${s.genreButton} ${activeGenreId === genre.id ? s.active : ''}`} key={genre.id}
+                            <button className={`${s.genreButton} ${activeGenreId === genre.id ? s.active : ''}`}
+                                    key={genre.id}
                                     onClick={() => setActiveGenreId (genre.id)}>{genre.name}</button>
                         )
                     )
@@ -204,7 +205,7 @@ function Filter ({
             </div>
             <div style={{margin: '3px'}}>
                 <>
-                    <label htmlFor="year-select" style={{color: 'snow'}}>Choose a year  : </label>
+                    <label htmlFor="year-select" style={{color: 'snow'}}>Choose a year : </label>
                 </>
 
 

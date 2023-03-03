@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import s from './App.module.css'
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Favourites from './components/Favourites/Favourites';
+import FavouritesList from './components/FavouritesList/FavouritesList';
 import HomePage from './components/HomePage/HomePage';
 import NaviBar from './components/Navigation/NaviBar';
 import Login from './components/Login/Login';
 import Signup from './components/SignUp/Signup';
 import MoviePage from './components/MoviePage/MoviePage';
 import NotFound from './components/NotFound/NotFound';
+import { db, auth } from './firebase-config';
+import { doc, updateDoc, arrayUnion , arrayRemove } from 'firebase/firestore';
 
 
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
@@ -86,13 +88,54 @@ function App () {
         setSearchText (e.target.value);
     };
 
-    const addFavouriteMovie = (movie) => {
 
-        const newFavouritesList = [...favourites, movie];
-        setFavourites (newFavouritesList);
-        console.log ('Added to Favourites');
-        alert ('Added to Favourites');
-    }
+    const addFavouriteMovie = async (movie) => {
+
+
+        try {
+
+            const currentUser = auth.currentUser;
+
+            const uid = currentUser.uid;
+
+
+            const userRef = doc (db, 'users', `${uid}`);
+
+            await updateDoc (userRef, {
+                favourites: arrayUnion (
+                    {
+                        id: `${movie.id}`,
+                        title: `${movie.title}`,
+                        poster_path: `${movie.poster_path}`,
+                        vote_average: `${movie.vote_average}`,
+                        release_date: `${movie.release_date}`,
+                    })
+            });
+
+
+            setFavourites (favourites);
+
+
+            console.log ('Added to FavouritesList');
+
+        } catch (error) {
+            console.error (error);
+        }
+    };
+
+    const removeFavouriteMovie = async (movieId) => {
+        try {
+            const currentUser = auth.currentUser;
+            const uid = currentUser.uid;
+            const userRef = doc(db, 'users', `${uid}`);
+            await updateDoc(userRef, {
+                favourites: arrayRemove({ id: movieId }),
+            });
+            console.log('Removed from FavouritesList');
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
     return (
@@ -109,17 +152,19 @@ function App () {
                 </div>
                 <div>
                     <Routes>
+                        <Route index path="/" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
 
-                        <Route index path="/home" element={<HomePage movies={movies} genres={genres} filtered={filtered}
-                                                                     searchText={searchText}
-                                                                     loading={loading} setFiltered={setFiltered}
-                                                                     activeGenreId={activeGenreId}
-                                                                     setActiveGenreId={setActiveGenreId}
-                                                                     filterByYearValue={filterByYearValue}
-                                                                     setFilterByYearValue={setFilterByYearValue}
-                                                                     changeHandler={changeHandler}
-                                                                     searchMovie={searchMovie} API_URL={API_URL}
-                                                                     addFavouriteMovie={addFavouriteMovie}
+
+                        <Route path="/home" element={<HomePage movies={movies} genres={genres} filtered={filtered}
+                                                               searchText={searchText}
+                                                               loading={loading} setFiltered={setFiltered}
+                                                               activeGenreId={activeGenreId}
+                                                               setActiveGenreId={setActiveGenreId}
+                                                               filterByYearValue={filterByYearValue}
+                                                               setFilterByYearValue={setFilterByYearValue}
+                                                               changeHandler={changeHandler}
+                                                               searchMovie={searchMovie} API_URL={API_URL}
+                                                               addFavouriteMovie={addFavouriteMovie}
                         />}
 
                         />
@@ -136,10 +181,13 @@ function App () {
                         />}
                         />
 
-                        <Route path="/favourites" element={<Favourites isLoggedIn={isLoggedIn} favourites={favourites}
-                                                                       API_URL={API_URL}/>}/>
+                        <Route path="/favourites" element={<FavouritesList isLoggedIn={isLoggedIn}
+                                                                           favourites={favourites}
+                                                                           API_URL={API_URL}/>}
+                               removeFavouriteMovie={removeFavouriteMovie}/>
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-                        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
+                        <Route path="/signup"
+                               element={<Signup setIsLoggedIn={setIsLoggedIn} favourites={favourites}/>}/>
                         <Route path="/movie/:id" element={<MoviePage/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>

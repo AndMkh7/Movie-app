@@ -28,7 +28,6 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
             .then (() => {
                 navigate ('/login');
                 setIsLoggedIn (false);
-                alert ('Logout completed')
             })
             .catch ((err) => {
                 setError (err.message);
@@ -79,6 +78,7 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                                                             onClick={handleLogout}>LogOut</Button>
                                                 </Link>
                                                 <img src={usersPhoto} alt={"User`s image"} width="30" height="35" />
+                                                <div style={{color:"snow"}}>Name</div>
                                             </>
 
                                             :
