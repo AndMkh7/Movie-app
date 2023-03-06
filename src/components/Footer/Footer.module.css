@@ -1,4 +1,42 @@
-.footer{
-    background-color: coral;
-    height: auto;
+footer {
+    background-color: #262626;
+    color: #ffffff;
+    padding: 50px 0;
+}
+
+footer h5 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #dcdcdc;
+}
+
+footer p {
+    margin-top: 30px;
+}
+
+@media (min-width: 768px) {
+    .col {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
     }
+}

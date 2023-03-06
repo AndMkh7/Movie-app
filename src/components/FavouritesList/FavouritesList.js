@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { doc , getDoc } from 'firebase/firestore';
+import { arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
 import Footer from '../Footer/Footer';
 import FavouriteMovie from './FavouriteMovie/FavouriteMovie';
 import PropTypes from 'prop-types';
 import { auth, db } from '../../firebase-config';
+import Loader from '../Loader/Loader';
 
 
 FavouritesList.propTypes = {
     isLoggedIn: PropTypes.bool,
-    removeFavouriteMovie:PropTypes.func
 }
 
 
-function FavouritesList ({isLoggedIn , removeFavouriteMovie}) {
+function FavouritesList ({isLoggedIn  }) {
     const navigate = useNavigate ();
 
     const [favourites, setFavourites] = useState ([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const currentUser = auth.currentUser;
-    // const uid = currentUser.uid;
-
 
     const getFavourites = async (userId) => {
 
@@ -33,19 +32,20 @@ function FavouritesList ({isLoggedIn , removeFavouriteMovie}) {
             console.log("FavList:", favList);
             return favList ;
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
 
     };
 
 
-
     useEffect(() => {
+        setIsLoading(true);
         const fetchFavourites = async () => {
             try {
                 const favList = await getFavourites(currentUser.uid);
                 setFavourites(favList);
+                setIsLoading(false)
+
             } catch (error) {
                 console.error("Error fetching favourites: ", error);
             }
@@ -55,36 +55,66 @@ function FavouritesList ({isLoggedIn , removeFavouriteMovie}) {
             navigate("/home");
         } else {
             fetchFavourites();
+
+
         }
     }, [isLoggedIn, navigate, currentUser.uid, setFavourites]);
 
-    if (favourites.length === 0) {
-        return <div style={{color:"red"}}>Loading...</div>;
-    }
+
+    const removeFavouriteMovie = async (movie) => {
+        try {
+            const currentUser = auth.currentUser;
+            const uid = currentUser.uid;
+            const userRef = doc(db, "users", uid);
+            const userSnap = await getDoc(userRef);
+
+            console.log("Movie was deleted" , movie);
+
+            await updateDoc(userRef, {
+                favourites: arrayRemove(movie)
+            });
+
+            const favList = userSnap.data().favourites;
+
+
+            let newFavourites = favList.filter((m) => m.id !== movie.id)
+
+            console.log("Favorites list after deleting:", newFavourites);
+            setFavourites(newFavourites);
+
+
+        } catch (error) {
+            console.error (error);
+        }
+    };
 
 
 
     return (
         <>
-            <Container style={{maxWidth: '1920px', minWidth: '220px'}}>
-                {favourites.length !== 0 ? (
-                    <div style={{width: '100%'}}>
-                        <div>
-                            <Row style={{overflowX: 'hidden'}}>
-                                {favourites.map ((movie) => (
-                                    <Col xs={12} sm={6} md={4} lg={3} key={movie.id}>
-                                        <FavouriteMovie {...movie} removeFavouriteMovie={removeFavouriteMovie} />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
-                    </div>
-                ) : (
-                    <h2 style={{color: 'tomato', textDecoration: 'inherit'}}>
-                        Not any favourite movie in Your Favourite list
-                    </h2>
-                )}
-            </Container>
+            {
+                isLoading ? <Loader/>:
+                    <Container style={{maxWidth: '1920px', minWidth: '220px'}}>
+                        {favourites.length !== 0 ? (
+                            <div style={{width: '100%'}}>
+                                <div>
+                                    <Row style={{overflowX: 'hidden'}}>
+                                        {favourites.map ((movie) => (
+                                            <Col xs={12} sm={6} md={4} lg={3} key={movie.id}>
+                                                <FavouriteMovie {...movie} removeFavouriteMovie={removeFavouriteMovie} />
+                                            </Col>
+                                        ))}
+                                    </Row>
+                                </div>
+                            </div>
+                        ) : (
+                            <h2 style={{color: 'tomato', textDecoration: 'inherit'}}>
+                                There is no any favourite movie in Your Favourite list
+                            </h2>
+                        )}
+                    </Container>
+            }
+
             <Footer/>
         </>
     );

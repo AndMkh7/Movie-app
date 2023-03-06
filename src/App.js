@@ -9,7 +9,7 @@ import Signup from './components/SignUp/Signup';
 import MoviePage from './components/MoviePage/MoviePage';
 import NotFound from './components/NotFound/NotFound';
 import { db, auth } from './firebase-config';
-import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion,  } from 'firebase/firestore';
 
 
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
@@ -116,25 +116,6 @@ function App () {
     };
 
 
-    const removeFavouriteMovie = async (movie) => {
-        try {
-            const currentUser = auth.currentUser;
-            const uid = currentUser.uid;
-            const userRef = doc(db, "users", uid);
-
-            console.log("Movie was deleted" , movie)
-
-            await updateDoc(userRef, {
-                favourites: arrayRemove(movie)
-            });
-            setFavourites([...favourites]);
-
-        } catch (error) {
-            console.error (error);
-        }
-    };
-
-
     return (
 
 
@@ -178,10 +159,7 @@ function App () {
                         />}
                         />
 
-                        <Route path="/favourites" element={<FavouritesList isLoggedIn={isLoggedIn}
-                                                                           removeFavouriteMovie={removeFavouriteMovie}
-                        />}
-                        />
+                        <Route path="/favourites" element={<FavouritesList isLoggedIn={isLoggedIn}/>}/>
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/signup"
                                element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
