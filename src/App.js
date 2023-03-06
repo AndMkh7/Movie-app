@@ -9,7 +9,7 @@ import Signup from './components/SignUp/Signup';
 import MoviePage from './components/MoviePage/MoviePage';
 import NotFound from './components/NotFound/NotFound';
 import { db, auth } from './firebase-config';
-import { doc, updateDoc, arrayUnion,  } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion, } from 'firebase/firestore';
 
 
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';

@@ -40,7 +40,7 @@ function Login ({setIsLoggedIn}) {
                                            style={{fontSize: '25px', fontStyle: 'italic', textDecoration: 'none'}}>Home
                     page</Link> for anonymous mode </h3>
                 <Box sx={{width: 3 / 4, maxWidth: '450px', minWidth: '230px'}}>
-                    {error && <h4>{error}</h4>}
+                    {error && <h4 style={{color: 'tomato', fontStyle: 'italic'}}>Invalid email or password</h4>}
                     <form onSubmit={handleSubmit} style={{padding: '30px', display: 'grid', gap: '10px'}}>
                         <div>
                             <TextField
@@ -67,7 +67,6 @@ function Login ({setIsLoggedIn}) {
 
                             <h3><Link to="/signup" style={{fontSize: '25px', textDecoration: 'none'}}>or Create
                                 Account</Link></h3>
-
                         </div>
 
                     </form>

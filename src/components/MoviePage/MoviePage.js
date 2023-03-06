@@ -23,7 +23,6 @@ function MoviePage () {
 
     const {poster_path, title,  overview, runtime, release_date, vote_average} = movie ;
 
-    console.log("5555555555",vote_average)
         return (
             <>
                 {
@@ -35,7 +34,7 @@ function MoviePage () {
                                          style={{maxWidth: '100%', height: 'auto', objectFit: 'cover'}}/>
 
                                 </div>
-                                <div>
+                                <div className={s.aboutMovie}>
                                     <h2 className={s.header}>{title}</h2>
                                     <p>{overview}</p>
                                     <p><b

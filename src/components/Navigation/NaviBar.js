@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './NaviBar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import usersPhoto from "../../images/user.png";
+import usersPhoto from '../../images/user.png';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
+
 
 NaviBar.propTypes = {
     query: PropTypes.string,
@@ -20,10 +23,55 @@ NaviBar.propTypes = {
 function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}) {
 
     const [error, setError] = useState ('');
+    const [currentUserName, setCurrentUserName] = useState ('');
     const navigate = useNavigate ();
-    const auth = getAuth ();
+
+    const getUserName = async (userId) => {
+
+        const userRef = doc (db, 'users', userId);
+        const userSnap = await getDoc (userRef);
+        if ( userSnap.exists () ) {
+            const userName = userSnap.data ().name;
+            const userSurname = userSnap.data ().surname;
+
+            console.log ('Document data:', userSnap.data ());
+            console.log ('User Name is :', userName);
+            console.log ('User Surname is :', userSurname);
+            return userName.slice (0, 3) + userSurname.slice (0, 3)
+
+
+        } else {
+            console.log ('No such document!');
+        }
+
+    };
+
+
+    useEffect (() => {
+
+        const fetchUserName = async () => {
+            const auth = getAuth ();
+            const currentUser = auth.currentUser;
+            const uid = currentUser.uid;
+            try {
+                const userName = await getUserName (uid)
+                setCurrentUserName (userName)
+
+            } catch (error) {
+                console.error ('Error fetching favourites: ', error);
+            }
+        };
+
+        if ( !isLoggedIn ) {
+            navigate ('/home');
+        } else {
+            fetchUserName ();
+        }
+    }, [isLoggedIn, setCurrentUserName]);
 
     const handleLogout = () => {
+        const auth = getAuth ();
+
         signOut (auth)
             .then (() => {
                 navigate ('/login');
@@ -77,8 +125,8 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                                                     <Button variant="primary" className=" me-2  border-warning"
                                                             onClick={handleLogout}>LogOut</Button>
                                                 </Link>
-                                                <img src={usersPhoto} alt={"User`s image"} width="30" height="35" />
-                                                <div style={{color:"snow"}}>Name</div>
+                                                <img src={usersPhoto} alt={'User`s image'} width="30" height="35"/>
+                                                <div style={{color: 'snow'}}>{currentUserName}</div>
                                             </>
 
                                             :
@@ -94,8 +142,6 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                                                             className=" me-2  border-warning">SignUp</Button>
                                                 </Link>
                                             </>
-
-
                                     }
 
 

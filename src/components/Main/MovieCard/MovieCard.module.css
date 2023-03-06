@@ -1,28 +1,29 @@
-.movieCard{
-    padding : 10px 10px 25px 10px;
+.movieCard {
+    padding: 10px 10px 25px 10px;
     width: 8rem;
 }
 
-.movieCardData{
+.movieCardData {
     width: 10rem;
     display: flex;
     flex-direction: column;
     position: relative;
 }
 
-.movieCardData:hover{
+.movieCardData:hover {
     border-color: tomato;
-    transform: scale(1.05) ;
+    transform: scale(1.05);
     transition: 0.7s;
     opacity: 50%;
 }
-.movieCardData:hover .overlay{
+
+.movieCardData:hover .overlay {
     opacity: 10%;
 }
 
-.overlay{
+.overlay {
     position: absolute;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     width: 100%;
     transition: 0.5s ease;
     opacity: 0;
@@ -32,58 +33,66 @@
     text-align: center;
 }
 
-.img{
-    width:10rem;
-    height:15rem;
-    border-radius: 10px 10px 0 0 ;
-    box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
-    -webkit-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
-    -moz-box-shadow: 8px 7px 20px 8px rgba(232,88,6,0.24);
+.img {
+    width: 10rem;
+    height: 15rem;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 8px 7px 20px 8px rgba(232, 88, 6, 0.24);
+    -webkit-box-shadow: 8px 7px 20px 8px rgba(232, 88, 6, 0.24);
+    -moz-box-shadow: 8px 7px 20px 8px rgba(232, 88, 6, 0.24);
     /*cursor: pointer;*/
 
 }
 
-.title{
+.title {
     width: 10rem;
     font-size: 14px;
     font-style: italic;
     font-weight: bold;
     font-family: Inconsolata, sans-serif;
-    margin-top:15px;
+    margin-top: 15px;
     margin-bottom: 15px;
     height: 30px;
     position: static;
-    color:coral;
+    color: coral;
     text-shadow: #3dd5f3;
     text-align: center;
 }
 
-.aboutMovie{
+.aboutMovie {
     width: 10rem;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     background-color: darkgray;
     border-radius: 0 0 4px 4px;
 }
 
-.date{
+.date {
     font-size: 15px;
-    color:midnightblue;
+    color: midnightblue;
     font-weight: bolder;
     margin: 5px 0 5px 4px;
 }
 
-.rate{
+.rate {
     font-size: 15px;
-    color:coral;
+    color: coral;
     font-weight: bolder;
     margin: 5px 4px 5px 0;
 }
 
-.highRate{
+.highRate {
     font-size: 15px;
     font-weight: bolder;
     margin: 5px 4px 5px 0;
-    color:lawngreen;
+    color: lawngreen;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3px;
 }
