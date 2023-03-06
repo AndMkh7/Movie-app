@@ -9,7 +9,7 @@ import Signup from './components/SignUp/Signup';
 import MoviePage from './components/MoviePage/MoviePage';
 import NotFound from './components/NotFound/NotFound';
 import { db, auth } from './firebase-config';
-import { doc, updateDoc, arrayUnion , arrayRemove } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 
 
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
@@ -34,8 +34,9 @@ function App () {
         fetch (API_URL)
             .then ((res) => res.json ())
             .then (data => {
-                setMovies (data.results);
                 setLoading (true);
+
+                setMovies (data.results);
             })
     }, []);
 
@@ -90,50 +91,46 @@ function App () {
 
 
     const addFavouriteMovie = async (movie) => {
-
-
         try {
-
             const currentUser = auth.currentUser;
 
             const uid = currentUser.uid;
-
 
             const userRef = doc (db, 'users', `${uid}`);
 
             await updateDoc (userRef, {
                 favourites: arrayUnion (
                     {
-                        id: `${movie.id}`,
+                        id: movie.id,
                         title: `${movie.title}`,
                         poster_path: `${movie.poster_path}`,
-                        vote_average: `${movie.vote_average}`,
+                        vote_average: movie.vote_average,
                         release_date: `${movie.release_date}`,
                     })
             });
-
-
             setFavourites (favourites);
-
-
-            console.log ('Added to FavouritesList');
 
         } catch (error) {
             console.error (error);
         }
     };
 
-    const removeFavouriteMovie = async (movieId) => {
+
+    const removeFavouriteMovie = async (movie) => {
         try {
             const currentUser = auth.currentUser;
             const uid = currentUser.uid;
-            const userRef = doc(db, 'users', `${uid}`);
+            const userRef = doc(db, "users", uid);
+
+            console.log("Movie was deleted" , movie)
+
             await updateDoc(userRef, {
-                favourites: arrayRemove({ id: movieId }),
+                favourites: arrayRemove(movie)
             });
-            console.log('Removed from FavouritesList');
+            setFavourites([...favourites]);
+
         } catch (error) {
-            console.error(error);
+            console.error (error);
         }
     };
 
@@ -182,12 +179,12 @@ function App () {
                         />
 
                         <Route path="/favourites" element={<FavouritesList isLoggedIn={isLoggedIn}
-                                                                           favourites={favourites}
-                                                                           API_URL={API_URL}/>}
-                               removeFavouriteMovie={removeFavouriteMovie}/>
+                                                                           removeFavouriteMovie={removeFavouriteMovie}
+                        />}
+                        />
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/signup"
-                               element={<Signup setIsLoggedIn={setIsLoggedIn} favourites={favourites}/>}/>
+                               element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/movie/:id" element={<MoviePage/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>

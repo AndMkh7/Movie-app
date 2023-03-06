@@ -11,22 +11,22 @@ FavouriteMovie.propTypes = {
     vote_average: PropTypes.number,
     addFavouriteMovie: PropTypes.func,
     id: PropTypes.number,
-    removeFavouriteMovie:PropTypes.func
+    removeFavouriteMovie: PropTypes.func
 
 }
 
 const API_IMG = 'https://image.tmdb.org/t/p/w500';
 
 
-function FavouriteMovie ({title, poster_path, release_date, vote_average, id , removeFavouriteMovie}) {
+function FavouriteMovie ({title, poster_path, release_date, vote_average, id, removeFavouriteMovie}) {
 
-
+    const movie ={id, title, release_date, vote_average, poster_path}
 
     const navigate = useNavigate ();
     const handleClick = () => {
         navigate (`/movie/${id}`)
     }
-
+    console.log ('ID', typeof (id));
 
     return (
 
@@ -40,11 +40,11 @@ function FavouriteMovie ({title, poster_path, release_date, vote_average, id , r
                     </div>
                     <div className={s.aboutMovie}>
                         <div className={s.date}>{release_date}</div>
-                        <div className={vote_average >= 7 ? s.highRate : s.rate}> {vote_average} </div>
+                        <div className={vote_average >= 7 ? s.highRate : s.rate}> {vote_average.toFixed(1)} </div>
                     </div>
                 </div>
             </Link>
-            <button onClick={(id)=>removeFavouriteMovie(id)}>
+            <button onClick={() => removeFavouriteMovie (movie)}>
                 Remove
             </button>
 
