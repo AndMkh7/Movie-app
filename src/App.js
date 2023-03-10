@@ -57,6 +57,10 @@ function App () {
 
     }, []);
 
+    useEffect(() => {
+        setSearchText('');
+    }, [movies]);
+
 
     const searchMovie = async (event) => {
         event.preventDefault ();
@@ -69,19 +73,16 @@ function App () {
             if ( searchData.results.length === 0 ) {
                 console.log ('No data with your searching text')
             } else {
+
+
+
                 setMovies (searchData.results);
-                console.log ('searchText,', searchText)
-                setSearchText ('');
             }
 
         } catch (error) {
             console.log (error);
-            setSearchText ('');
 
-        } finally {
-            setSearchText ('');
-
-        }
+        } 
     };
 
 
@@ -126,7 +127,7 @@ function App () {
 
                 <div>
                     <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}
-                             isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+                             isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
                 </div>
                 <div>
                     <Routes>
@@ -143,6 +144,8 @@ function App () {
                                                                changeHandler={changeHandler}
                                                                searchMovie={searchMovie} API_URL={API_URL}
                                                                addFavouriteMovie={addFavouriteMovie}
+                                                               isLoggedIn={isLoggedIn}
+
                         />}
 
                         />
@@ -156,6 +159,7 @@ function App () {
                                                                    changeHandler={changeHandler}
                                                                    searchMovie={searchMovie} API_URL={API_URL}
                                                                    addFavouriteMovie={addFavouriteMovie}
+                                                                   isLoggedIn={isLoggedIn}
                         />}
                         />
 
@@ -163,7 +167,7 @@ function App () {
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/signup"
                                element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
-                        <Route path="/movie/:id" element={<MoviePage/>}/>
+                        <Route path="/movie/:id" element={<MoviePage />}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>
                 </div>

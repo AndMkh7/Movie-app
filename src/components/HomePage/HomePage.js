@@ -11,7 +11,6 @@ HomePage.propTypes = {
     movies: PropTypes.array,
     genres: PropTypes.array,
     filtered: PropTypes.array,
-    searchText: PropTypes.string,
     loading: PropTypes.bool,
     activeGenreId: PropTypes.number,
     setFiltered: PropTypes.func,
@@ -19,14 +18,14 @@ HomePage.propTypes = {
     filterByYearValue: PropTypes.string,
     setFilterByYearValue: PropTypes.func,
     changeHandler: PropTypes.func,
-    searchMovie: PropTypes.func,
     addFavouriteMovie: PropTypes.func,
+    isLoggedIn: PropTypes.bool
 }
 
 
 function HomePage ({
                        API_URL, movies, genres, filtered, loading, activeGenreId,
-                       filterByYearValue, setFiltered, setActiveGenreId, setFilterByYearValue, addFavouriteMovie
+                       filterByYearValue, setFiltered, setActiveGenreId, setFilterByYearValue, addFavouriteMovie , isLoggedIn
                    }) {
 
     return (
@@ -41,7 +40,7 @@ function HomePage ({
 
 
                     <MovieList filtered={filtered} API_URL={API_URL} setFiltered={setFiltered}
-                               addFavouriteMovie={addFavouriteMovie}/>
+                               addFavouriteMovie={addFavouriteMovie} isLoggedIn={isLoggedIn} />
 
                     <Footer/>
                 </div>

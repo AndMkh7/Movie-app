@@ -112,9 +112,10 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
                                     aria-label="search"
                                     name="query"
                                     value={query} onChange={changeHandler}>
-
                                 </FormControl>
                                 <Button variant="secondary" type="submit" className="me-2">Search</Button>
+
+
                                 <Nav>
 
                                     {

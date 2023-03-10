@@ -11,7 +11,6 @@ import { db } from '../../firebase-config';
 
 Signup.propTypes = {
     setIsLoggedIn: PropTypes.func,
-    favourites: PropTypes.array
 }
 
 
@@ -23,7 +22,6 @@ function Signup ({setIsLoggedIn}) {
 
 
 
-    // const userList = collection (db, 'users')
 
     const handleSubmit = event => {
 

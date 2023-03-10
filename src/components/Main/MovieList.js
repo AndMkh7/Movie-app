@@ -11,10 +11,11 @@ MovieList.propTypes = {
     filtered: PropTypes.array,
     setFiltered: PropTypes.func,
     addFavouriteMovie: PropTypes.func,
+    isLoggedIn: PropTypes.bool
 };
 
 
-function MovieList ({filtered, setFiltered, addFavouriteMovie}) {
+function MovieList ({filtered, setFiltered, addFavouriteMovie , isLoggedIn}) {
     const [hasMore, setHasMore] = useState (true);
 
     const fetchMoreData = () => {
@@ -45,7 +46,7 @@ function MovieList ({filtered, setFiltered, addFavouriteMovie}) {
                                 {filtered.map ((movie) => (
                                     <Col xs={12} sm={6} md={4} lg={3} key={movie.id * Math.random ()}>
 
-                                        <MovieCard {...movie} addFavouriteMovie={addFavouriteMovie}/>
+                                        <MovieCard {...movie} addFavouriteMovie={addFavouriteMovie} isLoggedIn={isLoggedIn}/>
 
                                     </Col>
 
