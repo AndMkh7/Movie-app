@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import s from './Signup.module.css'
 import Footer from '../Footer/Footer';
-import PropTypes from 'prop-types';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import { naviBarContext } from '../../App';
 
 
-Signup.propTypes = {
-    setIsLoggedIn: PropTypes.func,
-}
 
+function Signup () {
+    const { setIsLoggedIn} = useContext (naviBarContext);
 
-function Signup ({setIsLoggedIn}) {
     const [user, setUser] = useState ({name: '', surname: '', login: '', password: '', favourites :[]});
     const [error, setError] = useState ('');
     const auth = getAuth ();
     const navigate = useNavigate ();
-
-
-
 
     const handleSubmit = event => {
 

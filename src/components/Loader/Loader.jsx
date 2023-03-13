@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RingLoader, ScaleLoader } from 'react-spinners';
 import s from './Loader.module.css';
-import PropTypes from 'prop-types';
+import { homePageContext } from '../../App';
 
 
-Loader.propTypes = {
-    loading: PropTypes.bool,
-}
 
 export const LoadMore = () => {
+
     return (<div className={s.loadMore}>
         <ScaleLoader
             color="#090b0a"
@@ -18,7 +16,9 @@ export const LoadMore = () => {
 }
 
 
-function Loader ({loading}) {
+function Loader () {
+    const {loading} = useContext(homePageContext)
+
     return (<div className={s.ringLoader}>
         <RingLoader
             color="#11ecc0"

@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import MovieCard from './MovieCard/MovieCard';
-import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import s from './MovieList.module.css';
 import { LoadMore } from '../Loader/Loader';
+import { homePageContext } from '../../App';
 
 
-MovieList.propTypes = {
-    filtered: PropTypes.array,
-    setFiltered: PropTypes.func,
-    addFavouriteMovie: PropTypes.func,
-    isLoggedIn: PropTypes.bool
-};
+function MovieList () {
+    const { filtered, setFiltered, addFavouriteMovie, isLoggedIn} = useContext (homePageContext);
 
-
-function MovieList ({filtered, setFiltered, addFavouriteMovie , isLoggedIn}) {
     const [hasMore, setHasMore] = useState (true);
 
     const fetchMoreData = () => {
@@ -46,7 +40,8 @@ function MovieList ({filtered, setFiltered, addFavouriteMovie , isLoggedIn}) {
                                 {filtered.map ((movie) => (
                                     <Col xs={12} sm={6} md={4} lg={3} key={movie.id * Math.random ()}>
 
-                                        <MovieCard {...movie} addFavouriteMovie={addFavouriteMovie} isLoggedIn={isLoggedIn}/>
+                                        <MovieCard {...movie} addFavouriteMovie={addFavouriteMovie}
+                                                   isLoggedIn={isLoggedIn}/>
 
                                     </Col>
 

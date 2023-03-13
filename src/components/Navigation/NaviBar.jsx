@@ -1,26 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './NaviBar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import usersPhoto from '../../images/user.png';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import { naviBarContext } from '../../App';
 
 
-NaviBar.propTypes = {
-    query: PropTypes.string,
-    searchMovie: PropTypes.func,
-    changeHandler: PropTypes.func,
-    isLoggedIn: PropTypes.bool,
-    setIsLoggedIn: PropTypes.func
-}
+function NaviBar () {
 
-
-function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}) {
+    const {query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn} = useContext (naviBarContext);
 
     const [error, setError] = useState ('');
     const [currentUserName, setCurrentUserName] = useState ('');
@@ -45,7 +38,6 @@ function NaviBar ({query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn}
         }
 
     };
-
 
     useEffect (() => {
 

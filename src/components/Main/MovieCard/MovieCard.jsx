@@ -14,8 +14,6 @@ MovieCard.propTypes = {
     overview: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     isLoggedIn : PropTypes.bool
-
-
 }
 
 const API_IMG = 'https://image.tmdb.org/t/p/w500';
@@ -53,6 +51,7 @@ function MovieCard ({title, poster_path, release_date, vote_average, id, addFavo
                                 <Button variant="outline-success" onClick={() => {
                                     addFavouriteMovie (movie);
                                     // navigate (`/favourites`)
+                                    //sra poxaren texadrel modal@
                                 }}>AddToFav</Button>
                                 <Button variant="outline-info" onClick={handleClick}>Info</Button>
                             </div> :

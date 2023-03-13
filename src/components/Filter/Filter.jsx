@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import s from './Filter.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PropTypes from 'prop-types';
+import { homePageContext } from '../../App';
 
 
 const years = [
@@ -135,26 +135,18 @@ const years = [
     1896
 ];
 
-Filter.propTypes = {
-    movies: PropTypes.array,
-    genres: PropTypes.array,
-    activeGenreId: PropTypes.number,
-    setFiltered: PropTypes.func,
-    setActiveGenreId: PropTypes.func,
-    filterByYearValue: PropTypes.string,
-    setFilterByYearValue: PropTypes.func,
-}
 
+function Filter () {
+    const {
+        movies,
+        genres,
+        activeGenreId,
+        setFiltered,
+        setActiveGenreId,
+        filterByYearValue,
+        setFilterByYearValue
+    } = useContext(homePageContext)
 
-function Filter ({
-                     movies,
-                     genres,
-                     activeGenreId,
-                     setFiltered,
-                     setActiveGenreId,
-                     filterByYearValue,
-                     setFilterByYearValue,
-                 }) {
 
     const onFilterDateValue = (event) => {
         setFilterByYearValue (event.target.value);

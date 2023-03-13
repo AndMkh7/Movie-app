@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import s from './App.module.css'
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import FavouritesList from './components/FavouritesList/FavouritesList';
@@ -15,6 +15,9 @@ import { doc, updateDoc, arrayUnion, } from 'firebase/firestore';
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
 const API_SEARCH = 'https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query';
 const GENRE_API = 'https://api.themoviedb.org/3/genre/movie/list?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US';
+
+export const homePageContext = createContext ();
+export const naviBarContext = createContext ();
 
 
 function App () {
@@ -57,8 +60,8 @@ function App () {
 
     }, []);
 
-    useEffect(() => {
-        setSearchText('');
+    useEffect (() => {
+        setSearchText ('');
     }, [movies]);
 
 
@@ -75,14 +78,13 @@ function App () {
             } else {
 
 
-
                 setMovies (searchData.results);
             }
 
         } catch (error) {
             console.log (error);
 
-        } 
+        }
     };
 
 
@@ -118,66 +120,49 @@ function App () {
 
 
     return (
+        <homePageContext.Provider
+            value={{
+                movies, genres, filtered,
+                searchText, loading, setFiltered,
+                activeGenreId, setActiveGenreId,
+                filterByYearValue, setFilterByYearValue,
+                changeHandler, searchMovie, addFavouriteMovie,
+                isLoggedIn, API_URL
+            }}>
+              <naviBarContext.Provider value={{
+                  searchMovie,changeHandler,
+                  isLoggedIn,setIsLoggedIn
+              }}>
+
+                    <BrowserRouter>
 
 
-        <BrowserRouter>
+                        <div className={s.App} style={{maxWidth: '1920px', minWidth: '300px'}}>
 
+                            <div>
+                                <NaviBar/>
+                            </div>
+                            <div>
+                                <Routes>
 
-            <div className={s.App} style={{maxWidth: '1920px', minWidth: '300px'}}>
+                                    <Route index path="/" element={<Login />}/>
+                                    <Route path="/home" element={<HomePage />}/>
+                                    <Route path="/trending" element={<HomePage />}/>
+                                    <Route path="/favourites" element={<FavouritesList />}/>
+                                    <Route path="/login" element={<Login />}/>
+                                    <Route path="/signup" element={<Signup/>}/>
+                                    <Route path="/movie/:id" element={<MoviePage/>}/>
+                                    <Route path="*" element={<NotFound/>}/>
 
-                <div>
-                    <NaviBar searchMovie={searchMovie} changeHandler={changeHandler}
-                             isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-                </div>
-                <div>
-                    <Routes>
-                        <Route index path="/" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
+                                </Routes>
+                            </div>
 
-
-                        <Route path="/home" element={<HomePage movies={movies} genres={genres} filtered={filtered}
-                                                               searchText={searchText}
-                                                               loading={loading} setFiltered={setFiltered}
-                                                               activeGenreId={activeGenreId}
-                                                               setActiveGenreId={setActiveGenreId}
-                                                               filterByYearValue={filterByYearValue}
-                                                               setFilterByYearValue={setFilterByYearValue}
-                                                               changeHandler={changeHandler}
-                                                               searchMovie={searchMovie} API_URL={API_URL}
-                                                               addFavouriteMovie={addFavouriteMovie}
-                                                               isLoggedIn={isLoggedIn}
-
-                        />}
-
-                        />
-                        <Route path="/trending" element={<HomePage movies={movies} genres={genres} filtered={filtered}
-                                                                   searchText={searchText}
-                                                                   loading={loading} setFiltered={setFiltered}
-                                                                   activeGenreId={activeGenreId}
-                                                                   setActiveGenreId={setActiveGenreId}
-                                                                   filterByYearValue={filterByYearValue}
-                                                                   setFilterByYearValue={setFilterByYearValue}
-                                                                   changeHandler={changeHandler}
-                                                                   searchMovie={searchMovie} API_URL={API_URL}
-                                                                   addFavouriteMovie={addFavouriteMovie}
-                                                                   isLoggedIn={isLoggedIn}
-                        />}
-                        />
-
-                        <Route path="/favourites" element={<FavouritesList isLoggedIn={isLoggedIn}/>}/>
-                        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-                        <Route path="/signup"
-                               element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
-                        <Route path="/movie/:id" element={<MoviePage />}/>
-                        <Route path="*" element={<NotFound/>}/>
-                    </Routes>
-                </div>
-
-            </div>
-        </BrowserRouter>
-
+                        </div>
+                    </BrowserRouter>
+            </naviBarContext.Provider>
+        </homePageContext.Provider>
 
     );
 }
-
 
 export default App;

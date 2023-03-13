@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
 import Footer from '../Footer/Footer';
 import FavouriteMovie from './FavouriteMovie/FavouriteMovie';
-import PropTypes from 'prop-types';
 import { auth, db } from '../../firebase-config';
 import Loader from '../Loader/Loader';
+import { naviBarContext } from '../../App';
 
 
-FavouritesList.propTypes = {
-    isLoggedIn: PropTypes.bool,
-}
+function FavouritesList () {
+    const { isLoggedIn} = useContext (naviBarContext);
 
-function FavouritesList ({isLoggedIn}) {
 
     const navigate = useNavigate ();
     const [favourites, setFavourites] = useState ([]);

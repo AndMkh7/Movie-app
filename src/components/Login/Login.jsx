@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import s from './Login.module.css';
 import Footer from '../Footer/Footer';
+import { naviBarContext } from '../../App';
 
 
-Login.propTypes = {
-    setIsLoggedIn: PropTypes.func
-}
 
-
-function Login ({setIsLoggedIn}) {
+function Login () {
+    const { setIsLoggedIn} = useContext (naviBarContext);
 
     const [user, setUser] = useState ({login: '', password: ''});
     const [error, setError] = useState ('');
