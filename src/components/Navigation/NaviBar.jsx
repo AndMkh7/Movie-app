@@ -8,12 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import usersPhoto from '../../images/user.png';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
-import { naviBarContext } from '../../App';
+import { naviBarContext } from '../../App/App';
+import Footer from '../Footer/Footer';
+
+
 
 
 function NaviBar () {
 
-    const {query, searchMovie, changeHandler, isLoggedIn, setIsLoggedIn} = useContext (naviBarContext);
+    const { searchMovie, changeHandler, isLoggedIn, setIsLoggedIn , searchText} = useContext (naviBarContext);
 
     const [error, setError] = useState ('');
     const [currentUserName, setCurrentUserName] = useState ('');
@@ -39,27 +42,26 @@ function NaviBar () {
 
     };
 
-    useEffect (() => {
 
+    useEffect(() => {
         const fetchUserName = async () => {
-            const auth = getAuth ();
-            const currentUser = auth.currentUser;
-            const uid = currentUser.uid;
             try {
-                const userName = await getUserName (uid)
-                setCurrentUserName (userName)
-
+                const auth = await getAuth();
+                auth.onAuthStateChanged(async (user) => {
+                    if ( user ) {
+                        const userName = await getUserName (user.uid)
+                        setCurrentUserName (userName)
+                    } else {
+                        navigate ('/home');
+                    }
+                });
             } catch (error) {
-                console.error ('Error fetching favourites: ', error);
+                console.error('Error fetching favourites: ', error);
             }
         };
 
-        if ( !isLoggedIn ) {
-            navigate ('/home');
-        } else {
-            fetchUserName ();
-        }
-    }, [isLoggedIn, setCurrentUserName]);
+        fetchUserName().then(r => r);
+    }, []);
 
     const handleLogout = () => {
         const auth = getAuth ();
@@ -68,23 +70,24 @@ function NaviBar () {
             .then (() => {
                 navigate ('/login');
                 setIsLoggedIn (false);
+                localStorage.setItem('isLoggedIn', 'false')
             })
             .catch ((err) => {
                 setError (err.message);
             });
     };
     return (
-        <div>
+        <div  >
             <>
 
                 <Navbar bg="dark" expand="lg" variant="dark" style={{maxWidth: '1920px', minWidth: '220px'}}>
                     <Container fluid style={{minWidth: '200px'}}>
                         <Nav className="me-auto">
-                            <Navbar.Brand href="/home">Home</Navbar.Brand>
+                            <Navbar.Brand href="/">Icon</Navbar.Brand>
                             <Nav.Link as={Link} to="/home">Home</Nav.Link>
                             <Nav.Link as={Link} to="/trending">Trending</Nav.Link>
                             {
-                                isLoggedIn && <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
+                                isLoggedIn  && <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
                             }
 
                         </Nav>
@@ -99,11 +102,11 @@ function NaviBar () {
                             <Form className="d-flex" onSubmit={searchMovie} autoComplete="off">
                                 <FormControl
                                     type="search"
-                                    placeholder="Search by keyword"
+                                    placeholder="Search movie"
                                     className="me-2"
                                     aria-label="search"
                                     name="query"
-                                    value={query} onChange={changeHandler}>
+                                    value={searchText} onChange={changeHandler}>
                                 </FormControl>
                                 <Button variant="secondary" type="submit" className="me-2">Search</Button>
 
@@ -147,7 +150,12 @@ function NaviBar () {
                 </Navbar>
 
             </>
-            <Outlet/>
+            <main >
+                <Outlet />
+
+            </main>
+            <Footer/>
+
         </div>
     );
 }

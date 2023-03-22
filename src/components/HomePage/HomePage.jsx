@@ -1,11 +1,8 @@
 import React, { useContext } from 'react';
 import MovieList from '../Main/MovieList';
-import Footer from '../Footer/Footer';
 import Filter from '../Filter/Filter';
 import Loader from '../Loader/Loader';
-import { homePageContext } from '../../App';
-
-
+import { homePageContext } from '../../App/App';
 
 
 function HomePage () {
@@ -18,7 +15,6 @@ function HomePage () {
                 <div>
                     <Filter/>
                     <MovieList  />
-                    <Footer/>
                 </div>
             </div>
     );

@@ -6,7 +6,7 @@ import s from './Signup.module.css'
 import Footer from '../Footer/Footer';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
-import { naviBarContext } from '../../App';
+import { naviBarContext } from '../../App/App';
 
 
 
@@ -34,6 +34,8 @@ function Signup () {
                     userId: res.user.uid
                 }));
                 setIsLoggedIn (true);
+                localStorage.setItem('isLoggedIn', 'true');
+
                 setError ('');
 
                 navigate ('/home')

@@ -1,9 +1,8 @@
-import React from 'react';
+import React  from 'react';
 import s from './MovieCard.module.css';
 import PropTypes from 'prop-types';
 import {  useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-
 
 MovieCard.propTypes = {
     title: PropTypes.string,
@@ -15,6 +14,7 @@ MovieCard.propTypes = {
     id: PropTypes.number.isRequired,
     isLoggedIn : PropTypes.bool
 }
+
 
 const API_IMG = 'https://image.tmdb.org/t/p/w500';
 
@@ -50,13 +50,10 @@ function MovieCard ({title, poster_path, release_date, vote_average, id, addFavo
                             <div className={s.buttons}>
                                 <Button variant="outline-success" onClick={() => {
                                     addFavouriteMovie (movie);
-                                    // navigate (`/favourites`)
-                                    //sra poxaren texadrel modal@
                                 }}>AddToFav</Button>
                                 <Button variant="outline-info" onClick={handleClick}>Info</Button>
                             </div> :
                             <Button variant="outline-info"  style={{
-                                position: 'center',
                                 marginTop: '3px',
                                 color: '#fff',
                                 borderRadius: '5px',

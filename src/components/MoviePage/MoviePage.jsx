@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Footer from '../Footer/Footer';
 import s from './MoviePage.module.css';
 import Loader from '../Loader/Loader';
 
@@ -49,7 +48,6 @@ function MoviePage () {
 
                                 </div>
                             </div>
-                            <Footer/>
 
                         </div>
                 }

@@ -4,7 +4,7 @@ import MovieCard from './MovieCard/MovieCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import s from './MovieList.module.css';
 import { LoadMore } from '../Loader/Loader';
-import { homePageContext } from '../../App';
+import { homePageContext } from '../../App/App';
 
 
 function MovieList () {

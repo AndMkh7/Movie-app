@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import s from './Filter.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { homePageContext } from '../../App';
+import { homePageContext } from '../../App/App';
 
 
 const years = [

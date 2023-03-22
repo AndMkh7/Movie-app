@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { TextField, Box, Button } from '@mui/material';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth,  signInWithEmailAndPassword, } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import s from './Login.module.css';
 import Footer from '../Footer/Footer';
-import { naviBarContext } from '../../App';
+import { naviBarContext } from '../../App/App';
 
 
 
@@ -16,11 +16,13 @@ function Login () {
     const navigate = useNavigate ();
     const auth = getAuth ();
 
+
     const handleSubmit = event => {
         event.preventDefault ();
         signInWithEmailAndPassword (auth, user.login, user.password)
             .then (() => {
                     setIsLoggedIn (true);
+                    localStorage.setItem('isLoggedIn', 'true')
                     console.log ('This user logged in', user.login)
                     navigate ('/home')
                 }
@@ -28,6 +30,7 @@ function Login () {
             .catch ((err) =>
                 setError (err.message))
     }
+
 
 
     return (

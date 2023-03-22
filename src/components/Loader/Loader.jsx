@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { RingLoader, ScaleLoader } from 'react-spinners';
 import s from './Loader.module.css';
-import { homePageContext } from '../../App';
+import { homePageContext } from '../../App/App';
 
 
 
