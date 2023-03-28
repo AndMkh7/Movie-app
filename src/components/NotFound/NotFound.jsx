@@ -6,8 +6,8 @@ import s from './NotFound.module.css';
 
 function NotFound () {
     const navigate = useNavigate ();
+
     const handleClick = () => {
-        console.log("Not found ")
         navigate ('/home');
     }
     return (

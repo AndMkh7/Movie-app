@@ -23,6 +23,7 @@ function MovieList () {
 
     }
 
+    console.log("MOVIE LIST 26 TOX");
 
     return (
 
@@ -62,4 +63,4 @@ function MovieList () {
 }
 
 
-export default MovieList;
+export default React.memo(MovieList);

@@ -16,7 +16,7 @@ import Footer from '../Footer/Footer';
 
 function NaviBar () {
 
-    const { searchMovie, changeHandler, isLoggedIn, setIsLoggedIn , searchText} = useContext (naviBarContext);
+    const { searchMovie, changeHandler, isLoggedIn, setIsLoggedIn , searchText } = useContext (naviBarContext);
 
     const [error, setError] = useState ('');
     const [currentUserName, setCurrentUserName] = useState ('');
@@ -102,7 +102,7 @@ function NaviBar () {
                             <Form className="d-flex" onSubmit={searchMovie} autoComplete="off">
                                 <FormControl
                                     type="search"
-                                    placeholder="Search movie"
+                                    placeholder="Search movie..."
                                     className="me-2"
                                     aria-label="search"
                                     name="query"

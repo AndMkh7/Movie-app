@@ -113,6 +113,6 @@ function FavouritesList () {
 }
 
 
-export default FavouritesList;
+export default React.memo(FavouritesList);
 
 

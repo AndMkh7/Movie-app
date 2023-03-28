@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext  } from 'react';
+import React, { useState, useEffect, createContext , useCallback  } from 'react';
 import s from './App.module.css'
 import { Route, Routes,  Navigate } from 'react-router-dom';
 import FavouritesList from '../components/FavouritesList/FavouritesList';
@@ -23,7 +23,7 @@ export const naviBarContext = createContext (undefined);
 function App () {
 
     const [movies, setMovies] = useState ([]);
-    const [searchText, setSearchText] = useState ('Search movie');
+    const [searchText, setSearchText] = useState ('');
     const [genres, setGenres] = useState ([]);
     const [filtered, setFiltered] = useState ([]);
     const [activeGenreId, setActiveGenreId] = useState (0);
@@ -33,8 +33,8 @@ function App () {
     const [favourites, setFavourites] = useState ([]);
 
 
-
     console.log("LOCAL" , localStorage.getItem('isLoggedIn') )
+
     useEffect (() => {
         fetch (API_URL)
             .then ((res) => res.json ())
@@ -64,7 +64,28 @@ function App () {
 
 
 
-    const searchMovie = async (event) => {
+    // const searchMovie = async (event) => {
+    //     event.preventDefault ();
+    //     console.log ('Searching');
+    //     try {
+    //         const url = API_SEARCH + '=' + searchText;
+    //         const [searchRes] = await Promise.all([
+    //             fetch(url),
+    //             setSearchText("")
+    //         ]);
+    //         const searchData = await searchRes.json ();
+    //         console.log ('search data', searchData);
+    //         if ( searchData.results.length === 0 ) {
+    //             console.log ('No data with your searching text')
+    //         } else {
+    //             setMovies (searchData.results);
+    //         }
+    //     } catch (error) {
+    //         console.log (error);
+    //     }
+    // };
+
+    const searchMovie = useCallback(async (event) => {
         event.preventDefault ();
         console.log ('Searching');
         try {
@@ -76,20 +97,16 @@ function App () {
             const searchData = await searchRes.json ();
             console.log ('search data', searchData);
             if ( searchData.results.length === 0 ) {
-                console.log ('No data with your searching text')
+                console.log ('No data with your searching text');
+                alert('No data with your searching text')
             } else {
                 setMovies (searchData.results);
             }
         } catch (error) {
             console.log (error);
         }
-    };
-
-    useEffect (() => {
-        setSearchText ('');
-    }, []);
-
-
+    }, [searchText]);
+    
 
     const changeHandler = (e) => {
         setSearchText (e.target.value);

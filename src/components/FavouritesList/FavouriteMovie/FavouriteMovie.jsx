@@ -38,7 +38,7 @@ function FavouriteMovie ({title, poster_path, release_date, vote_average, id, re
                 </div>
                 <div className={s.aboutMovie}>
                     <div className={s.date}>{release_date}</div>
-                    <div className={vote_average >= 7 ? s.highRate : s.rate}> {vote_average.toFixed (1)} </div>
+                    <div className={vote_average >= 7 ? s.highRate : s.rate}> {vote_average} </div>
                 </div>
                 <div className={s.buttons}>
                     <Button variant="outline-danger" onClick={() => {
