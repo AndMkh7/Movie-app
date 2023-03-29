@@ -3,6 +3,7 @@ import s from './MovieCard.module.css';
 import PropTypes from 'prop-types';
 import {  useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { API_IMG } from '../../../constants/constants';
 
 MovieCard.propTypes = {
     title: PropTypes.string,
@@ -16,7 +17,6 @@ MovieCard.propTypes = {
 }
 
 
-const API_IMG = 'https://image.tmdb.org/t/p/w500';
 
 
 function MovieCard ({title, poster_path, release_date, vote_average, id, addFavouriteMovie, isLoggedIn}) {

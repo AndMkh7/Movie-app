@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import s from './MoviePage.module.css';
 import Loader from '../Loader/Loader';
+import { BASE_URL , api_key } from '../../constants/constants';
 
 
 function MoviePage () {
     const params = useParams ();
-    const MOVIE_API = `https://api.themoviedb.org/3/movie/${params.id}?api_key=41c7736fada50851ecd6e23d73e02ef4`;
+    const MOVIE_API = `${BASE_URL}/movie/${params.id}${api_key}`;
     const [movie, setMovie] = useState ({});
 
     useEffect (() => {

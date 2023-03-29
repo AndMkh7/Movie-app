@@ -10,11 +10,10 @@ import MoviePage from '../components/MoviePage/MoviePage';
 import NotFound from '../components/NotFound/NotFound';
 import { db, auth } from '../firebase-config';
 import { doc, updateDoc, arrayUnion, } from 'firebase/firestore';
+import { API_URL }  from '../constants/constants';
+import { API_SEARCH }  from '../constants/constants';
+import { GENRE_API }  from '../constants/constants';
 
-
-const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=41c7736fada50851ecd6e23d73e02ef4';
-const API_SEARCH = 'https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query';
-const GENRE_API = 'https://api.themoviedb.org/3/genre/movie/list?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US';
 
 export const homePageContext = createContext (undefined);
 export const naviBarContext = createContext (undefined);
@@ -64,26 +63,7 @@ function App () {
 
 
 
-    // const searchMovie = async (event) => {
-    //     event.preventDefault ();
-    //     console.log ('Searching');
-    //     try {
-    //         const url = API_SEARCH + '=' + searchText;
-    //         const [searchRes] = await Promise.all([
-    //             fetch(url),
-    //             setSearchText("")
-    //         ]);
-    //         const searchData = await searchRes.json ();
-    //         console.log ('search data', searchData);
-    //         if ( searchData.results.length === 0 ) {
-    //             console.log ('No data with your searching text')
-    //         } else {
-    //             setMovies (searchData.results);
-    //         }
-    //     } catch (error) {
-    //         console.log (error);
-    //     }
-    // };
+
 
     const searchMovie = useCallback(async (event) => {
         event.preventDefault ();
