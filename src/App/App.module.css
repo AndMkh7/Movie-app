@@ -6,6 +6,8 @@ root {
     background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
     margin: auto;
     width: auto;
+    max-width: 1920px;
+    min-width: 300px;
 }
 
 .container {

@@ -31,7 +31,7 @@ function MoviePage () {
                             <div className={s.movieInfo}>
                                 <div>
                                     <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title}
-                                         style={{maxWidth: '100%', height: 'auto', objectFit: 'cover'}}/>
+                                        className={s.image} />
 
                                 </div>
                                 <div className={s.aboutMovie}>

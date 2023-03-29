@@ -139,7 +139,7 @@ function App () {
               }}>
 
 
-                      <div className={s.App} style={{maxWidth: '1920px', minWidth: '300px'}}>
+                      <div className={s.App} >
                           <div className="container">
 
                           <div>

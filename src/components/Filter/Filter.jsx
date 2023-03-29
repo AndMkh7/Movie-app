@@ -50,7 +50,7 @@ function Filter () {
 
 
     return (
-        <div className={s.filter} style={{maxWidth: '1920px', minWidth: '220px'}}>
+        <div className={s.filter} >
 
 
             <div>

@@ -21,3 +21,9 @@
     padding-left: 1px;
     padding-top: 5px;
 }
+
+.image{
+    max-width: 100% ;
+    height: auto;
+    object-fit: cover
+}

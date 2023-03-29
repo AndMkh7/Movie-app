@@ -5,7 +5,10 @@
     height: auto;
     padding-left: 10px;
     padding-right: 18px;
+    max-width: 1920px;
+    min-width: 220px;
 }
+
 
 .genreButton{
     align-items: center;

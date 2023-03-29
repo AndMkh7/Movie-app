@@ -3,7 +3,6 @@ import { TextField, Button } from '@mui/material';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import s from './Signup.module.css'
-import Footer from '../Footer/Footer';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { naviBarContext } from '../../App/App';
@@ -49,7 +48,7 @@ function Signup () {
         <>
             <div className={s.signup}>
 
-                {error && <p style={{color: 'red', fontSize: '30px', fontWeight: 'bolder'}}>{error}</p>}
+                {error && <p className={s.error} >{error}</p>}
                 <h4>Please fill in the registration fields !!!</h4>
                 <form onSubmit={handleSubmit} style={{padding: '30px', display: 'grid', gap: '10px'}}>
                     <div>
@@ -84,7 +83,6 @@ function Signup () {
                     </div>
                 </form>
             </div>
-            <Footer/>
         </>
 
     )
