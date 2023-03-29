@@ -2,7 +2,8 @@ export const api_key = '?api_key=41c7736fada50851ecd6e23d73e02ef4';
 
 export const BASE_URL = `https://api.themoviedb.org/3`;
 export const API_URL = `${BASE_URL}/movie/popular${api_key}`;
-export const API_SEARCH = `${BASE_URL}/search/movie${api_key}`;
+// const API_SEARCH = 'https://api.themoviedb.org/3/search/movie?api_key=41c7736fada50851ecd6e23d73e02ef4&language=en-US&page=1&include_adult=false&query';
+export const API_SEARCH = `${BASE_URL}/search/movie${api_key}&page=1&include_adult=false&query`;
 export const GENRE_API = `${BASE_URL}/genre/movie/list${api_key}`;
 export const API_IMG = `https://image.tmdb.org/t/p/w500`;
 export const years = [

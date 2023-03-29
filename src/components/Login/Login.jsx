@@ -3,7 +3,6 @@ import { TextField, Box, Button } from '@mui/material';
 import { getAuth,  signInWithEmailAndPassword, } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import s from './Login.module.css';
-import Footer from '../Footer/Footer';
 import { naviBarContext } from '../../App/App';
 
 
@@ -72,7 +71,6 @@ function Login () {
                     </form>
                 </Box>
             </div>
-            <Footer/>
         </>
 
     )
